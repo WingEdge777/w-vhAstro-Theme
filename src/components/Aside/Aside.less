@@ -10,7 +10,6 @@ aside.vh-aside {
   height: auto;
 
   &>.sticky-aside {
-    position: -webkit-sticky;
     position: sticky;
     top: calc(66px + 1rem);
     box-sizing: border-box;
@@ -408,6 +407,44 @@ aside.vh-aside {
             font-size: 0.688rem;
           }
 
+        }
+      }
+    }
+
+    // ToC
+    &.toc {
+      &>.vh-aside-toc {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        width: 100%;
+        height: max-content;
+        overflow: hidden;
+
+        &>a {
+          position: relative;
+          display: inline-block;
+          text-decoration: none;
+          font-size: 0.78rem;
+          transition: color 0.188s ease-in-out;
+
+          &:hover {
+            color: var(--vh-main-color);
+          }
+
+          &>.toc-level-2 {
+            padding-left: 0;
+          }
+
+          &>.toc-level-3 {
+            padding-left: 0.5rem;
+            font-size: 0.70rem;
+          }
+
+          &>.toc-level-4 {
+            padding-left: 1.0rem;
+            font-size: 0.65rem;
+          }
         }
       }
     }

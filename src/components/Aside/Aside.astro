@@ -8,7 +8,12 @@ import { fmtTime } from "@/utils/index";
 import SITE_CONFIG from "@/config";
 const { Avatar, Author, Motto, WebSites, GoogleAds, AsideShow } = SITE_CONFIG;
 // 获取文章数据
-import { getCategories, getTags, getRecommendArticles, getCountInfo } from "@/utils/getPostInfo";
+import {
+	getCategories,
+	getTags,
+	getRecommendArticles,
+	getCountInfo,
+} from "@/utils/getPostInfo";
 // 获取数据统计
 // 分类列表
 const categories = getCategories();
@@ -20,10 +25,7 @@ const CountInfo = getCountInfo();
 const recommendArticles = getRecommendArticles();
 // TOC
 const { post, headings } = Astro.props;
-// const currentPath = Astro.url.pathname;
-// const isBlogPost = currentPath.startsWith('/blog/');
 const shouldShowToc = headings && headings.length > 0;
-console.log("shouldShowToc", shouldShowToc, headings)
 // Google 广告组件
 import GoogleAd from "@/components/GoogleAd/GoogleAd.astro";
 // 侧边栏样式
@@ -35,12 +37,23 @@ import "./Aside.less";
 	{
 		AsideShow.WebSitesShow && (
 			<section class="vh-aside-item user">
-				<img class="vh-aside-avatar" src="/assets/images/lazy-loading.webp" data-vh-lz-src={Avatar} alt={Author} />
+				<img
+					class="vh-aside-avatar"
+					src="/assets/images/lazy-loading.webp"
+					data-vh-lz-src={Avatar}
+					alt={Author}
+				/>
 				<span class="vh-aside-auther">{Author}</span>
 				<p class="vh-aside-motto">{Motto}</p>
 				<section class="vh-aside-links">
-					{WebSites.map(item => (
-						<a class="vh-aside-links-item" href={item.link} title={item.text} target="_blank" rel="noopener nofollow">
+					{WebSites.map((item) => (
+						<a
+							class="vh-aside-links-item"
+							href={item.link}
+							title={item.text}
+							target="_blank"
+							rel="noopener nofollow"
+						>
 							<Svg src={item.icon} />
 						</a>
 					))}
@@ -66,10 +79,18 @@ import "./Aside.less";
 
 	<!-- 公告块 -->
 	{
-		!shouldShowToc && SITE_CONFIG.Tips && (
+		SITE_CONFIG.Tips && (
 			<section class="vh-aside-item tips">
 				<span>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
 						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 						<path d="M3 9.662c2 2.338 2 4.338 0 6.338c3 .5 4.5 1 5 4c2 -3 6 -4 9 0c0 -3 1 -4 4 -4.004q -3 -2.995 0 -5.996c-3 0 -5 -2 -5 -5c-2 4 -5 3 -7.5 -1c-.5 3 -2.5 5 -5.5 5.662" />
 					</svg>
@@ -86,11 +107,13 @@ import "./Aside.less";
 	{
 		AsideShow.CategoriesShow && (
 			<section class="vh-aside-item cat">
-				<h3><bold>分类</bold></h3>
+				<h3>
+					<bold>分类</bold>
+				</h3>
 				<div class="vh-aside-cat">
 					{categories
 						.sort((a: any, b: any) => b.count - a.count)
-						.map(i => (
+						.map((i) => (
 							<a href={`/categories/${i.title}`}>
 								<span>{i.title}</span>
 								<i>{i.count}</i>
@@ -107,7 +130,7 @@ import "./Aside.less";
 			<section class="vh-aside-item tags">
 				<h3>热门标签</h3>
 				<div class="vh-aside-tags">
-					{tags.map(i => (
+					{tags.map((i) => (
 						<a href={`/tag/${i[0]}`}>
 							<span>{i[0]}</span>
 							<em>{i[1]}</em>
@@ -118,7 +141,7 @@ import "./Aside.less";
 		)
 	}
 
-	<section class="sticky-aside">
+	<section class="sticky-aside vh-animation vh-animation-init">
 		<!-- 最新文章块 -->
 		{
 			recommendArticles.length && AsideShow.recommendArticleShow && (
@@ -128,7 +151,11 @@ import "./Aside.less";
 						{recommendArticles.map((i, idx) => (
 							<a href={`/article/${i.id}`}>
 								<span>
-									{idx < 3 ? <i>{idx + 1}</i> : <em>{idx + 1}.</em>}
+									{idx < 3 ? (
+										<i>{idx + 1}</i>
+									) : (
+										<em>{idx + 1}.</em>
+									)}
 									<cite class="vh-ellipsis">{i.title}</cite>
 								</span>
 								<time>{fmtTime(i.date, "YYYY-MM-DD A")}</time>
@@ -138,13 +165,33 @@ import "./Aside.less";
 				</section>
 			)
 		}
-
+		{
+			shouldShowToc && (
+				<nav class="vh-aside-item toc">
+					<h3>文章目录</h3>
+					<div class="vh-aside-toc">
+						{headings.map(
+							(h: { depth: any; slug: any; text: unknown }) => (
+								<a href={`#${h.slug}`}>
+									<span class={`toc-level-${h.depth}`}>
+										{h.text}
+									</span>
+								</a>
+							),
+						)}
+					</div>
+				</nav>
+			)
+		}
 		<!-- 谷歌广告块 -->
 		{
 			GoogleAds.ad_Client && GoogleAds.asideAD_Slot && (
 				<section class="vh-aside-item ad">
 					<h3>广而告之</h3>
-					<GoogleAd className="vh-aside-ad" slotID={GoogleAds.asideAD_Slot} />
+					<GoogleAd
+						className="vh-aside-ad"
+						slotID={GoogleAds.asideAD_Slot}
+					/>
 				</section>
 			)
 		}

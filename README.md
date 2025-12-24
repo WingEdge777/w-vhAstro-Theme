@@ -8,7 +8,9 @@ Blog Demo  ➡️ [https://www.wingedge777.com](https://www.wingedge777.com)
 
 - [x] Add github action config for easy deployment
   - Pernsonal server or github pages, depending on your choise.
-- [x] Comment system:
-  - keep twikoo only, rm waline
-- [ ] Astro managed assets, minimize outputs size.
-  - ing: home-banner optimized
+- [x] Comment system
+  - Kept twikoo only, rm waline
+- [x] ToC sidebar
+  - Added `Table of Content` sidebar into swup container, smoothingly show ToC and get permalink
+- [x] Astro managed assets, minimizes outputs size
+  - Optimized: home-banner image size, speeds up page loadding
