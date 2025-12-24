@@ -7,6 +7,10 @@
 
 博客站点  ➡️ [https://www.wingedge777.com](https://www.wingedge777.com)，欢迎访问！
 
+Lighthouse 评分：
+
+![lighthouse](./img/lighthouse.png)
+
 ## 基于原主题做的一些修改
 
 - [x] 文章目录侧边栏

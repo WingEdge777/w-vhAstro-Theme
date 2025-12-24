@@ -6,6 +6,10 @@ Personal blog and astro theme based on [vhAstro-Theme](https://github.com/uxiaoh
 
 Blog Demo  ➡️ [https://www.wingedge777.com](https://www.wingedge777.com)
 
+Lighthouse result:
+
+![lighthouse](./img/lighthouse.png)
+
 ## Modified Features
 
 - [x] ToC sidebar
