@@ -4,7 +4,7 @@ categories: AI infer
 tags:
   - LLM serving
   - sglang
-id: 1234567
+id: "1234567"
 date: 2025-10-26 17:13:27
 cover: "/assets/images/banner/7b1491d13dfb97a4.webp"
 ---

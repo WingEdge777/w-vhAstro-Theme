@@ -13,7 +13,7 @@ cover: "/assets/images/banner/8cef6fb3c78dc3ad.webp"
 是 leetcode 每日一题跳出来的。咋看了一眼题就觉得很有趣，让我想到经典的类似题，如：维护一个队列中的中位数，具体题不记得了。
 :::
 
-### 计算子数组的 x-sum II
+## 计算子数组的 x-sum II
 
 如之前所言，这题的题面就让人容易联想到维护滑动窗口中的中位数，维护中位数的做法是如何实现的呢，就是用一大一小个 set，每次插入数据无脑往大的 set 里插入，插入之后做一个 balance 操作，所谓 balance 就是平均一下两个 set 的大小，然后把小 set 中的最大值 mx 和大 set 中的最小值 mi 对比一下，如果 mx > mi，那么就在两个 set 中交换一下两个元素；
 
@@ -37,6 +37,8 @@ cover: "/assets/images/banner/8cef6fb3c78dc3ad.webp"
   - 单次遍历的最后 balance 一下，ans 值就是答案啦，push 到答案列表里。
 
 代码如下，仅使用 c++ STL pair，set 和 unordered_map， 无任何特殊优化：
+
+## Code
 
 ``` cpp
 #include<iostream>
