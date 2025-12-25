@@ -13,7 +13,7 @@ export async function getStaticPaths(options: GetStaticPathsOptions) {
 	// 隐藏的文章不显示
 	return paginate(
 		posts.filter(i => !i.data.hide),
-		{ pageSize: 15 }
+		{ pageSize: 10 }
 	);
 }
 

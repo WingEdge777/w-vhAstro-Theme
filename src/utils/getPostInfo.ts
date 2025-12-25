@@ -34,6 +34,7 @@ const getRecommendArticles = () => {
 // 获取上一篇下一篇文章
 const getPrevNextPosts = (id: string) => {
   const noHidePosts = posts.filter(i => !i.data.hide);
+  noHidePosts.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
   const index = noHidePosts.findIndex(i => i.data.id === id);
   const none = { title: '没有啦~', id: '#' };
   return { prev: noHidePosts[index - 1] ? noHidePosts[index - 1].data : none, next: noHidePosts[index + 1] ? noHidePosts[index + 1].data : none }
