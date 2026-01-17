@@ -20,6 +20,7 @@ Lighthouse result:
   - Kept twikoo only, rm waline
 - [x] Astro managed assets, minimizes outputs size
   - Optimized: home-banner image size, speeds up page loadding
+- [x] Add `permalink` for headerings
 - [ ] To add `i18n` pages
 - [ ] To add `light/dark` mode
 

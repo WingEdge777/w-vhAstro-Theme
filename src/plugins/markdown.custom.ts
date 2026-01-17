@@ -27,7 +27,7 @@ const remarkNote = () => {
         }
         // 设置 class
         hProperties.class = `vh-node vh-${name}${attributes.type ? ` ${name}-${attributes.type}` : ''}`;
-        
+
       }
       // 文章字数统计
       const textOnPage = toString(tree);
@@ -38,13 +38,54 @@ const remarkNote = () => {
   };
 }
 
+const slugify = (text: string) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')     // 空格转连字符
+    .replace(/&/g, '-and-')   // & 转 -and-
+    .replace(/[^\w\u4e00-\u9fa5\-]+/g, '') // 保留中文、英文、数字、连字符
+    .replace(/\-\-+/g, '-');  // 移除重复连字符
+};
 
 //  处理 HTML 标签
 const addClassNames = () => {
   return (tree: any) => {
     visit(tree, (node, index, parent) => {
+      const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+      console.log(node);
+      if (headings.includes(node.tagName)) {
+        console.log(node)
+
+        const text = toString(node);
+
+        if (!node.properties.id) {
+          node.properties.id = slugify(text);
+        }
+
+        const anchor = {
+          type: 'element',
+          tagName: 'a',
+          properties: {
+            href: `#${node.properties.id}`,
+            class: 'vh-anchor',
+            'aria-hidden': 'true',
+          },
+          children: [{ type: 'text', value: '# ' }]
+        };
+
+        node.children.unshift(anchor);
+      }
+
       // 处理 a 标签
       if (node.tagName === 'a') {
+        const classes = node.properties.class || [];
+        const classList = Array.isArray(classes) ? classes : classes.split(' ');
+        if (classList.includes('vh-anchor')) {
+          return; // 遇到锚点直接结束当前循环，不执行下面的 target="_blank"
+        }
+
         node.properties.target = '_blank', node.properties.rel = 'noopener nofollow'
         node.children = [{ type: 'element', tagName: 'span', children: node.children || [] }];
         // 处理 pre 标签
