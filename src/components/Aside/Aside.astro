@@ -171,10 +171,10 @@ import "./Aside.less";
 					<h3>文章目录</h3>
 					<div class="vh-aside-toc">
 						{headings.map(
-							(h: { depth: any; slug: any; text: unknown }) => (
+							(h: { depth: number; slug: string; text: string }) => (
 								<a href={`#${h.slug}`}>
 									<span class={`toc-level-${h.depth}`}>
-										{h.text}
+										{h.text.replace(/^#+\s*/, '')}
 									</span>
 								</a>
 							),
