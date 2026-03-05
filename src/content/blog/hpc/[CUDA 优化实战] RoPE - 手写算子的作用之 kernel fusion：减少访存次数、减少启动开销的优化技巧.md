@@ -1,7 +1,7 @@
 ---
 title: "[CUDA 优化实战] RoPE - 手写算子的作用之 kernel fusion：减少访存次数、减少启动开销的优化技巧"
-categories: "分类"
-tags: ["标签"]
+categories: "code"
+tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "722570534c4ba0f8"
 date: 2026-03-05 17:36:30
 cover: "/assets/images/banner/7b1491d13dfb97a4.webp"
