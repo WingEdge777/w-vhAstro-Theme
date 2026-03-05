@@ -54,9 +54,9 @@ const addClassNames = () => {
   return (tree: any) => {
     visit(tree, (node, index, parent) => {
       const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-      console.log(node);
+      // console.log(node);
       if (headings.includes(node.tagName)) {
-        console.log(node)
+        // console.log(node)
 
         const text = toString(node);
 
