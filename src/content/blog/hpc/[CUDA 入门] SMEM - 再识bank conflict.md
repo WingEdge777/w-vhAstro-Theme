@@ -8,12 +8,12 @@ cover: "/assets/images/banner/2cc757cc144b109f.webp"
 ---
 
 :::note
-网上介绍和解决bank conflict的文章不胜枚举。我也不想多言，但是最近确实学到了一点新理解。
+网上介绍和解决bank conflict的文章不胜枚举。我也不想多言，但是最近确实学到了一点新理解。有关 bank conflict 详细理解和分析，不要看乱七八糟的博客了，可以直接参考 NV 技术报告：<https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41723/>
 :::
 
 ## 0. 序
 
-上一篇文章超越cuBLAS矩阵乘法中，通过 swizzling解决bank conflict后我虽然很确信没有冲突，但是ncu profile还是报shared storage bank conflict (尽管占读写wavefronts总量比例不高，~1.9%)，最后，经过反复试验发现注释掉Bs smem写入就没冲突了。当时也不理解，以为ncu判定规则问题，等文章发表后经评论区大佬提醒，才恍然大悟，还存在warp间的访问冲突。
+之前文章超越cuBLAS矩阵乘法中，通过 swizzling解决bank conflict后我虽然很确信没有冲突，但是ncu profile还是报shared storage bank conflict (尽管占读写wavefronts总量比例不高，~1.9%)，最后，经过反复试验发现注释掉Bs smem写入就没冲突了。当时也不理解，以为ncu判定规则问题，等文章发表后经评论区大佬提醒，才恍然大悟，还存在warp间的访问冲突。
 
 现代gpu架构L1/TEX/Smem 都划归到一整块SRAM上的，一个SM独占SRAM，而且单个SM上都有多个sub-core调度器（一般4个），确实会存在多个 warp 瞬时并行访问 L1/TEX/SMEM 的问题。这里决定做一个测试再次验证一下。
 
