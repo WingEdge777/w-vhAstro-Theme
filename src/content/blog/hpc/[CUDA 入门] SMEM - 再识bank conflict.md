@@ -85,8 +85,6 @@ l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum \
 总结
 这种冲突，额，目前没有看到有说解决的办法，底层物理调度无可避免，比例也不是很高。个人觉得只能尽量降低冲突概率（比如向量化访问或者使用ldmatrix命令等，让单次访问请求密度更高，但整体请求更分散，容易错开），再就是通过流水线计算时延隐藏来掩盖这种冲突开销。（现在异步拷贝+计算重叠已经是 kernel 优化必备了）
 
-更多有关 bank conflict 详细理解和分析，不要看乱七八糟的博客了，可以直接参考 NV 技术报告：<https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41723/>
-
 完整测试代码可以从github获取，同时欢迎关注我的手撕算子系列项目vitamin-cuda，共同交流学习进步！
 
 <https://github.com/WingEdge777/vitamin-cuda/blob/main/samples/bank_conflict_ncu/readme.md>
