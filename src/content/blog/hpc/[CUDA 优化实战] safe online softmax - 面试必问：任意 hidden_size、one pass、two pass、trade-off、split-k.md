@@ -818,6 +818,6 @@ softmax_splitk                 mean time: 2.372789 ms, speedup: 3.23
 
 主要还是想向大家分享一下，手动以寄存器、smem 做 cache 的思路，和支持任意长度的 L2 兜底的 kernel 实现，以及最后 split-k 的优化实现，希望大家有所收获；
 
-所有 kernel 和测试代码可以从 github 获取：
+所有 kernel 和测试代码可以从 github 获取：https://github.com/WingEdge777/vitamin-cuda
 
 以上
