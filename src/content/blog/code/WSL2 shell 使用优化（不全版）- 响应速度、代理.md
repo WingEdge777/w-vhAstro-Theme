@@ -13,7 +13,7 @@ cover: "/assets/images/banner/7b1491d13dfb97a4.webp"
 
 ## 0. 背景
 
-本人虽然使用 windows 电脑，但一直使用 WSL2 工作，所有项目代码等都在 WSL2 里，也更习惯于 linux 命令行操作。结合 vscode 的 remote 套件连接 WSL 进行开发非常方便。
+本人虽然使用 Windows 电脑，但一直使用 WSL2 工作，所有项目代码等都在 WSL2 里，也更习惯于 linux 命令行操作。结合 vscode 的 remote 套件连接 WSL 进行开发非常方便。
 但默认配置下在使用 shell ，可能会有代理配置难或代理无法生效、shell 响应速度较慢（敲个 `ls`，`cd ..`, `ip a` 体感上都要卡顿 0.5 ~ 1s）等问题，简直要怀疑人生。
 
 如果你也有和我一样的感觉，看完本文，还你一个丝滑流畅的 WSL shell 体验！
@@ -31,7 +31,8 @@ sudo apt install fish
 
 fish # 进入 fish
 
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher （如果有代理问题，可以先看下一小节）
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher 
+#（如果有代理问题，可以先看下一小节）
 ```
 
 fisher 推荐安装插件：
@@ -68,7 +69,7 @@ sudo apt remove --purge zsh
 sudo apt autoremove
 ```
 
-### 1.2 配置 fish 同时解决命令行使用 windows 代理问题
+### 1.2 配置 fish 同时解决命令行使用 Windows 代理问题
 
 fish 的配置文件是 `~/.config/fish/config.fish`
 以下是我把原来 zsh 的配置扔给 gemini 返回的 fish 配置，朋友们可以按需修改
@@ -184,7 +185,7 @@ zoxide init fish | source
 **网络代理**
 有的朋友可能会说直接使用 mirrored 网络就好了，然后配置 127.0.0.1 的代理端口即可。但本人时机使用体验，即使配置了 mirrored 网络，某些情况下，尤其是笔记本休眠，重新打开电脑，网络就有可能有问题。反正是挺玄学的。
 
-最稳妥的还是使用 NAT 网络，然后通过 windows 开启局域网代理，wsl 通过局域网 ip 访问代理。
+最稳妥的还是使用 NAT 网络，然后通过 Windows 开启局域网代理，wsl 通过局域网 ip 访问代理。
 
 - 在 Windows 上开启局域网代理（如 Clash、v2rayN 等），确保允许来自局域网的连接；
 - 在 WSL 中获取 Windows 主机 IP（NAT 模式下），使用 ip route 获取 ip：具体见上面配置
@@ -193,10 +194,10 @@ zoxide init fish | source
 
 此步骤是命令行提示符美化/护眼需求，无此需求可直接跳过；
 
-在windows里下载并安装 Nerd Font 字体：<https://www.nerdfonts.com/font-downloads>
+在Windows里下载并安装 Nerd Font 字体：<https://www.nerdfonts.com/font-downloads>
 
 - 我选了 Proto Nerd Font
-- Windows Terminel 配置 ubuntu 字体
+- Windows Terminal 配置 ubuntu 字体
   - 设置-左侧配置文件-ubuntu-右侧外观-字体：填入`0xProto Nerd Font Mono`
 
 wsl 内 安装 starship：
@@ -287,8 +288,8 @@ time_format = "%T"
 
 wsl shell 交互响应慢来自于两个方面：
 
-- 95%概率的绝对元凶 - windows defender 的安全扫描：你每敲一个命令都会被 windows defender 拦截检查风险，然后放行，这里系统开销简直爆炸
-  - 解决方法：去 `windows defender-病毒和威胁防护-管理设置-排除项-添加排除项`，把 wsl 的 vhdx 文件直接加入排除项
+- 95%概率的绝对元凶 - Windows defender 的安全扫描：你每敲一个命令都会被 Windows defender 拦截检查风险，然后放行，这里系统开销简直爆炸
+  - 解决方法：去 `Windows defender-病毒和威胁防护-管理设置-排除项-添加排除项`，把 wsl 的 vhdx 文件直接加入排除项
   - 我这里因为安装在 D 盘了，朋友们按需调整
 - shell 插件过多，或插件逻辑复杂
   - 卸载掉无用或者不常用的插件
@@ -321,8 +322,8 @@ fisher install ajeetdsouza/zoxide.fish
 
 经过以上配置，你的 WSL2 shell 应该已经非常丝滑了，命令响应速度大幅提升，代理问题也彻底得到解决。
 
-以上，如有错误，欢迎指正，感谢~
+以上
 
-本文首发于 <https://www.wingedge777.com>
+如有错误，欢迎指正，感谢~
 
-可以随意转载
+本文首发于 <https://www.wingedge777.com>, 可以随意转载
