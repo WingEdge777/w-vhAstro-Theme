@@ -1,5 +1,5 @@
 ---
-title: "WSL2 shell 使用优化（不全版）- 响应速度、代理配置"
+title: "WSL2 shell 使用优化 - 交互响应速度、代理配置"
 categories: "code"
 tags: ["wsl"]
 id: "8483c569b3895079"
@@ -8,15 +8,15 @@ cover: "/assets/images/banner/7b1491d13dfb97a4.webp"
 ---
 
 :::note
-文章描述
+我承认，世界上最好的 linux 发行版，那就是 -- WSL
 :::
 
 ## 0. 背景
 
-本人虽然使用 windows 电脑，但一直使用 WSL2 工作，所有项目代码等都在 WSL2里，也更习惯于 linux 命令行操作。结合 vscode 的 remote 套件连接 WSL 进行开发非常方便。
-但默认配置下本人发现使用 shell 过程中，代理难配置、shell 响应速度较慢（敲个 `ls`，`cd ..`, `ip a` 体感上都要卡顿 0.5 ~ 1s），简直要怀疑人生。
+本人虽然使用 windows 电脑，但一直使用 WSL2 工作，所有项目代码等都在 WSL2 里，也更习惯于 linux 命令行操作。结合 vscode 的 remote 套件连接 WSL 进行开发非常方便。
+但默认配置下在使用 shell ，可能会有代理配置难或代理无法生效、shell 响应速度较慢（敲个 `ls`，`cd ..`, `ip a` 体感上都要卡顿 0.5 ~ 1s）等问题，简直要怀疑人生。
 
-如果你也遇到和我一样的问题，看完本文，还你一个丝滑流畅的 WSL shell 体验！
+如果你也有和我一样的感觉，看完本文，还你一个丝滑流畅的 WSL shell 体验！
 
 ## 1. 切换 fish
 
@@ -34,10 +34,10 @@ fish # 进入 fish
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher （如果有代理问题，可以先看下一小节）
 ```
 
-fisher推荐安装插件：
+fisher 推荐安装插件：
 
 ```bash
-fisher install jorgebucaran/autopair.fish # autopair补全括号引号
+fisher install jorgebucaran/autopair.fish # autopair 补全括号引号
 fisher install franciscolourenco/done # 长时间任务完成系统提示
 ```
 
@@ -68,11 +68,10 @@ sudo apt remove --purge zsh
 sudo apt autoremove
 ```
 
-### 1.2 配置 fish 同时解决命令行使用 windows 代理问题）
+### 1.2 配置 fish 同时解决命令行使用 windows 代理问题
 
-fish的配置文件是 `~/.config/fish/config.fish`
+fish 的配置文件是 `~/.config/fish/config.fish`
 以下是我把原来 zsh 的配置扔给 gemini 返回的 fish 配置，朋友们可以按需修改
-
 
 ```bash
 if status is-interactive
@@ -91,7 +90,6 @@ fish_add_path /usr/lib/ccache
 # ==========================================
 # 2. 全局环境变量 （使用 set -gx 替代 export)
 # ==========================================
-set -gx JAVA_HOME /opt/jdk1.8.0_231
 set -gx PNPM_HOME /home/xxx/.local/share/pnpm
 
 # 动态获取 CUDA 架构版本 (Fish 使用圆括号进行命令替换）
@@ -182,15 +180,16 @@ zoxide init fish | source
 最稳妥的还是使用 NAT 网络，然后通过 windows 开启局域网代理，wsl 通过局域网 ip 访问代理。
 
 - 在 Windows 上开启局域网代理（如 Clash、v2rayN 等），确保允许来自局域网的连接；
-- 在 WSL 中获取 Windows 主机 IP（NAT 模式下），使用ip route获取ip：具体见上面配置
+- 在 WSL 中获取 Windows 主机 IP（NAT 模式下），使用 ip route 获取 ip：具体见上面配置
 
 ### 1.3 安装和配置 starship（可选）
 
 此步骤是命令行提示符美化/护眼需求，无此需求可直接跳过；
 
 下载并安装 Nerd Font 字体：<https://www.nerdfonts.com/font-downloads>
-- 我选了Proto Nerd Font
-- windows Terminel配置ubuntushell外观
+
+- 我选了 Proto Nerd Font
+- Windows Terminel 配置 ubuntu 字体
   - 设置-左侧配置文件-ubuntu-右侧外观-字体：填入`0xProto Nerd Font Mono`
 
 wsl 内 安装 starship：
@@ -201,7 +200,7 @@ curl -sS https://starship.rs/install.sh | sh
 echo 'starship init fish | source' >> ~/.config/fish/config.fish
 ```
 
-配置：
+starship 配置：
 
 ```toml
 # ~/.config/starship.toml
@@ -275,19 +274,22 @@ format = "[$time]($style)"
 time_format = "%T"
 ```
 
+重开一个 shell 窗口体验一下
+
 ## 2. 速度优化
 
 wsl shell 交互响应慢来自于两个方面：
 
 - 95%概率的绝对元凶 - windows defender 的安全扫描：你每敲一个命令都会被 windows defender 拦截检查风险，然后放行，这里系统开销简直爆炸
-  - 解决方法：去 windows defender 里，把 wsl 的 vhex 文件直接加入排除项
-- shell 插件过多
+  - 解决方法：去 `windows defender-病毒和威胁防护-管理设置-排除项-添加排除项`，把 wsl 的 vhdx 文件直接加入排除项
+  - 我这里因为安装在 D 盘了，朋友们按需调整
+- shell 插件过多，或插件逻辑复杂
   - 卸载掉无用或者不常用的插件
-  - 检查一下你的 shell 插件，如果你是 fish 用户，用 fisher 安装过 `jethrokuan/z`（纯 fish 脚本实现）
+  - 如果你是 fish 用户，检查一下你的 shell 插件，用 fisher 安装过 `jethrokuan/z`（纯 fish 脚本实现）
     - 强烈建议卸载，这玩意的逻辑简直天才才写得出来，它会
       - 调用 mktemp 创建临时文件；调用 date 获取时间戳；最离谱的是：它每次 cd 都会调用一次 awk 去扫描并重写整个数据库文件，然后再用 mv 覆盖回去。
-        - 这里每次都会导致一坨 fork/exec 进程调用开销
-    - 解决：卸载 `jethrokuan/z`，如果有需求用 `zoxide` 替代，性能和体验都更好（ 这里我不知道 zsh 的 z 插件逻辑是怎样的，如果有同样问题，一样建议卸载）
+        - 这里每次都会导致一坨 fork/exec 进程调用开销，在 wsl 简直就是灾难（虚拟化劫持，文件系统元数据性能受限）
+    - 解决：卸载 `jethrokuan/z`，如果有需求用 `zoxide` 替代，性能和体验都更好（ zsh 的 z 插件应该也是类似的，一样建议卸载）
 
 ```bash
 fisher remove jethrokuan/z
@@ -298,6 +300,8 @@ zoxide init fish | source
 
 fisher install ajeetdsouza/zoxide.fish
 ```
+
+**总结**：在 WSL2 中，所有涉及 cd 或 prompt 触发的逻辑，必须尽可能避免 Fork 外部进程。能用 Rust/C++ 二进制解决的，绝不用 Shell 脚本。能减少 I/O 往返的，绝不读写磁盘。
 
 ## 3. 结束
 
