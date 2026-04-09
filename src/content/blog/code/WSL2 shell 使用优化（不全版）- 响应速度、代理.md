@@ -308,7 +308,7 @@ fisher remove jethrokuan/z
 
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 
-zoxide init fish | source
+echo 'zoxide init fish | source' >> ~/.config/fish/config.fish
 
 fisher install ajeetdsouza/zoxide.fish
 ```
