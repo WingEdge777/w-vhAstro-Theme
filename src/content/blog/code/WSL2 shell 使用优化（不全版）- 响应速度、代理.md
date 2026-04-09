@@ -87,6 +87,13 @@ fish_add_path /home/xxx/.local/share/pnpm
 fish_add_path /home/xxx/.influxdb/
 fish_add_path /usr/lib/ccache
 
+# 我们排除掉绝大部分 Windows 挂载路径
+set -gx PATH (string match -v '*/mnt/*' $PATH)
+
+# 手动加回你需要的高频 Windows 工具,只要路径明确，不会造成全局扫描负担
+set -p PATH "/mnt/d/Program Files/Microsoft VS Code/bin"
+set -p PATH "/mnt/d/Program Files/cursor/resources/app/bin"
+
 # ==========================================
 # 2. 全局环境变量 （使用 set -gx 替代 export)
 # ==========================================
@@ -186,7 +193,7 @@ zoxide init fish | source
 
 此步骤是命令行提示符美化/护眼需求，无此需求可直接跳过；
 
-下载并安装 Nerd Font 字体：<https://www.nerdfonts.com/font-downloads>
+在windows里下载并安装 Nerd Font 字体：<https://www.nerdfonts.com/font-downloads>
 
 - 我选了 Proto Nerd Font
 - Windows Terminel 配置 ubuntu 字体
@@ -254,8 +261,8 @@ format = "[$symbol$branch]($style) "
 
 [git_status]
 style = "red bold"
-# 既然你追求高性能，我们可以让 Git 状态显示得更直接
-format = "([$all_status$ahead_behind]($style) )"
+# 既然追求高性能，我们可以让 Git 状态显示得更直接
+format = '([$all_status$ahead_behind]($style) )'
 
 [character]
 # 既然用 0xProto，用这个 Lambda 符号非常对味
@@ -288,8 +295,12 @@ wsl shell 交互响应慢来自于两个方面：
   - 如果你是 fish 用户，检查一下你的 shell 插件，用 fisher 安装过 `jethrokuan/z`（纯 fish 脚本实现）
     - 强烈建议卸载，这玩意的逻辑简直天才才写得出来，它会
       - 调用 mktemp 创建临时文件；调用 date 获取时间戳；最离谱的是：它每次 cd 都会调用一次 awk 去扫描并重写整个数据库文件，然后再用 mv 覆盖回去。
-        - 这里每次都会导致一坨 fork/exec 进程调用开销，在 wsl 简直就是灾难（虚拟化劫持，文件系统元数据性能受限）
+        - 这里每次都会导致一坨 fork/exec 进程调用开销，在 Linux 原生内核里，fork() 很轻。但在 WSL2 中，由于虚拟化层对指令的拦截和 Windows Defender 的监控，每次执行 awk 或 mktemp 都要经历一次昂贵的上下文切换。cd 一次，它连着触发 4-5 个进程调用，开销爆炸。
     - 解决：卸载 `jethrokuan/z`，如果有需求用 `zoxide` 替代，性能和体验都更好（ zsh 的 z 插件应该也是类似的，一样建议卸载）
+- PATH清理：
+  - WSL2 默认把 Windows 的 PATH 全部塞进 Linux，导致 Shell 在查找命令时跨文件系统扫描，这也是 ls 等命令卡顿的元凶之一：
+    - 解决方法：移除/mnt路径，但我保留了code和cursor
+  - **避坑**：config.fish 中手动清洗 PATH 时，建议直接使用 set -p PATH 来添加 Windows 路径，而不是使用 fish_add_path。因为后者带有路径去重和持久化缓存逻辑，在手动重置 PATH 的脚本中可能会因为幂等性判断导致添加失败。
 
 ```bash
 fisher remove jethrokuan/z
@@ -302,6 +313,9 @@ fisher install ajeetdsouza/zoxide.fish
 ```
 
 **总结**：在 WSL2 中，所有涉及 cd 或 prompt 触发的逻辑，必须尽可能避免 Fork 外部进程。能用 Rust/C++ 二进制解决的，绝不用 Shell 脚本。能减少 I/O 往返的，绝不读写磁盘。
+
+**如果配置完还是慢？**
+请检查你的 ~/.config/fish/conf.d/ 目录。很多老插件（如 OMF）即使卸载了也会在这里留下残余的 .fish 脚本，每次启动都会被静默加载。如果遇到不明卡顿，运行 fish --profile /tmp/fish.prof -c "exit" 抓一下耗时排名，真相就在里面。
 
 ## 3. 结束
 
