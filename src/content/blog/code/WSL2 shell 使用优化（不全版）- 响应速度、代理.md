@@ -250,13 +250,13 @@ truncation_length = 3
 fish_style_pwd_dir_length = 1 # 路径太长时会自动缩写
 
 [python]
-symbol = ""
+symbol = " "
 format = '[${symbol}py${version}](cyan) '
 detect_extensions = [] # 不根据文件后缀探测（提升性能）
 detect_files = []      # 不根据文件探测（提升性能）
 
 [git_branch]
-symbol = " "
+symbol = " "
 style = "magenta bold"
 format = "[$symbol$branch]($style) "
 
