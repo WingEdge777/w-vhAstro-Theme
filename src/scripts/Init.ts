@@ -42,7 +42,6 @@ import SmoothScroll from "@/scripts/Smoothscroll";
 // 页面初始化 Only
 const videoList: any[] = [];
 const MusicList: any[] = [];
-let commentLIst: any = { };
 const indexInit = async (only: boolean = true) => {
   // 初始化网站运行时间
   only && initWebSiteTime();

@@ -1,4 +1,5 @@
-import vhPaopaoInit from '../../public/assets/js/vhPaopao.js';
+import vhPaopaoInit from "@/scripts/vhPaopao";
+
 let headerMainHeight = 0;
 export default async () => {
   // 调用

@@ -1,7 +1,6 @@
 import path from "path";
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import Compress from "@playform/compress";
 import Compressor from "astro-compressor";
 import { defineConfig } from 'astro/config';
 import { fileURLToPath } from 'url';
@@ -35,7 +34,6 @@ export default defineConfig({
 		updateBodyClass: false,
 		globalInstance: true
 	}),
-	Compress({ Image: false, Action: { Passed: async () => true } }),
 	sitemap({
 		// 处理末尾带 / 的 url
 		serialize: (item) => ({ ...item, url: item.url.endsWith('/') ? item.url.slice(0, -1) : item.url })
