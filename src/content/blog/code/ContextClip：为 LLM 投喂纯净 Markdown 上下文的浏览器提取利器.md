@@ -1,7 +1,7 @@
 ---
 title: "ContextClip：为 LLM 投喂纯净 Markdown 上下文的浏览器提取利器"
-categories: "分类"
-tags: ["标签"]
+categories: "code"
+tags: ["LLM", "markdown", "js"]
 id: "133b6cec3f625597"
 date: 2026-05-08 21:39:36
 cover: "/assets/images/banner/7b1491d13dfb97a4.webp"

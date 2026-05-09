@@ -4,7 +4,7 @@ import SITE_CONFIG from "@/config";
 const canonicalData = new URL(Astro.url.pathname, Astro.site);
 const canonicalURL = canonicalData.href.replace(/\/+$/, "");
 // 页面内容的元数据
-const { Title, Keywords, Description, PageCover } = Astro.props;
+const { Title, Keywords, Description, PageCover, PublishedTime, ModifiedTime } = Astro.props;
 const {
 	Site,
 	Title: SiteName,
@@ -16,6 +16,8 @@ const {
 const WebTitle = Title || SiteName;
 const SiteCover = Site + Cover;
 const WebCover = PageCover || SiteCover;
+const publishedISO = PublishedTime ? new Date(PublishedTime).toISOString() : undefined;
+const modifiedISO = ModifiedTime ? new Date(ModifiedTime).toISOString() : publishedISO;
 // Schema.org 结构化数据（JSON-LD）
 const WebSiteData = {
 	"@context": "https://schema.org",
@@ -38,8 +40,8 @@ const ArticleData = {
 	headline: WebTitle,
 	description: Description,
 	image: [WebCover],
-	datePublished: new Date().toISOString().replace("Z", `+08:00`),
-	dateModified: new Date().toISOString().replace("Z", `+08:00`),
+	datePublished: publishedISO,
+	dateModified: modifiedISO,
 	author: { "@type": "Person", name: Author, url: Site },
 	publisher: {
 		"@type": "Organization",
