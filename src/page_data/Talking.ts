@@ -1,3 +1,5 @@
+import type { TalkingItem, ToolDataSource } from "@/type/tool";
+
 export default {
   // API 接口请求优先，数据格式保持和 data 一致
   api: '',
@@ -12,4 +14,4 @@ export default {
       "content": "打工才是生活的常态"
     }
   ]
-}
+} satisfies ToolDataSource<TalkingItem>;

@@ -1,3 +1,5 @@
+import type { LinkItem, ToolDataSource } from "@/type/tool";
+
 export default {
   // API 接口请求优先，数据格式保持和 data 一致
   api: '',
@@ -16,4 +18,4 @@ export default {
       "descr": "运气是计划之外的东西."
     }
   ]
-}
+} satisfies ToolDataSource<LinkItem>;

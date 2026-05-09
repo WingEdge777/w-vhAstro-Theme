@@ -1,4 +1,6 @@
 import { inRouter, outRouter } from "@/utils/updateRouter";
+import { getInitFeatures, type InitFeature } from "@/scripts/initPlan";
+import type { Destroyable } from "@/type/common";
 // Banner 打字效果
 import TypeWriteInit from "@/scripts/TypeWrite";
 // 泡泡🫧效果
@@ -39,62 +41,53 @@ import SmoothScroll from "@/scripts/Smoothscroll";
 
 // ============================================================
 
-// 页面初始化 Only
-const videoList: any[] = [];
-const MusicList: any[] = [];
-const indexInit = async (only: boolean = true) => {
-  // 初始化网站运行时间
-  only && initWebSiteTime();
-  // 初始化BackTop组件
-  only && BackTopInitFn();
-  // SmoothScroll 滚动优化
-  only && SmoothScroll();
-  // 图片灯箱
-  only && ViewImage();
-  // 初始化文章代码块
-  codeInit();
-  // 图片懒加载初始化
-  vhLzImgInit();
-  // 初始化 LivePhoto
-  livePhotoInit();
-  // 文章视频播放器初始化
-  videoInit(videoList);
-  // 文章音乐播放器初始化
-  musicInit(MusicList);
-  // 友情链接初始化
-  initLinks();
-  // 动态说说初始化
-  initTalking();
-  // Google 广告
-  GoogleAdInit();
-  // 谷歌 SEO 推送
-  SeoPushInit();
-  // 文章评论初始化
-  checkComment() && commentInit(checkComment())
-  // 打字效果
-  only && TypeWriteInit();
-  // 泡泡🫧效果
-  PaoPaoInit();
-  // 预加载搜索数据
-  only && searchFn("");
-  // 初始化搜索功能
-  vhSearchInit();
-  // 移动端侧边栏初始化
-  initMobileSidebar();
+const videoList: Destroyable[] = [];
+const musicList: Destroyable[] = [];
+
+const featureHandlers: Record<InitFeature, () => void | Promise<void>> = {
+  "site-time": initWebSiteTime,
+  "back-top": BackTopInitFn,
+  "smooth-scroll": SmoothScroll,
+  "view-image": ViewImage,
+  "code": codeInit,
+  "lazy-image": vhLzImgInit,
+  "live-photo": livePhotoInit,
+  "video": () => videoInit(videoList),
+  "music": () => musicInit(musicList),
+  "links": initLinks,
+  "talking": initTalking,
+  "google-ad": GoogleAdInit,
+  "seo-push": SeoPushInit,
+  "comment": () => {
+    const commentKey = checkComment();
+    if (commentKey) return commentInit(commentKey);
+  },
+  "type-write": TypeWriteInit,
+  "paopao": PaoPaoInit,
+  "search-preload": () => searchFn(""),
+  "search-ui": vhSearchInit,
+  "mobile-sidebar": initMobileSidebar,
+};
+
+const runInitFeatures = async (firstLoad: boolean) => {
+  const features = getInitFeatures(firstLoad, Boolean(checkComment()));
+  for (const feature of features) {
+    await featureHandlers[feature]();
+  }
+};
+
+const disposeMediaPlayers = () => {
+  videoList.forEach((item) => item.destroy());
+  videoList.length = 0;
+  musicList.forEach((item) => item.destroy());
+  musicList.length = 0;
 };
 
 export default () => {
   // 首次初始化
-  indexInit();
+  runInitFeatures(true);
   // 进入页面时触发
-  inRouter(() => indexInit(false));
+  inRouter(() => runInitFeatures(false));
   // 离开当前页面时触发
-  outRouter(() => {
-    // 销毁播放器
-    videoList.forEach((i: any) => i.destroy());
-    videoList.length = 0;
-    // 销毁音乐
-    MusicList.forEach((i: any) => i.destroy());
-    MusicList.length = 0;
-  });
+  outRouter(disposeMediaPlayers);
 }

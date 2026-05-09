@@ -15,8 +15,6 @@ export default {
   Motto: '',
   // Cover 网站缩略图
   Cover: '/assets/images/banner/7b1491d13dfb97a4.webp',
-  // 网站侧边栏公告 (不填写即不开启)
-  Tips: '<p>欢迎光临我的博客 🎉</p>',
   // 首页打字机文案列表
   TypeWriteList: [
     '活到老，学到老',

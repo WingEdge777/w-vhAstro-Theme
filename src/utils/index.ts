@@ -1,15 +1,16 @@
-import dayjs from "dayjs";
+import dayjs, { type ConfigType } from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import timezone from "dayjs/plugin/timezone.js";
+import type { RenderableBlogEntry } from "@/type/blog";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 // 设置中文语言环境
 import 'dayjs/locale/zh-cn'
 dayjs.locale('zh-cn');
 // 获取文章的描述
-const getDescription = (post: any, num: number = 150) => (post.rendered ? post.rendered.html.replace(/<[^>]+>/g, "").replace(/\s+/g, "") : post.body.replace(/\n/g, "").replace(/#/g, "")).slice(0, num) || '暂无简介'
+const getDescription = (post: RenderableBlogEntry, num: number = 150) => (post.rendered ? post.rendered.html.replace(/<[^>]+>/g, "").replace(/\s+/g, "") : post.body.replace(/\n/g, "").replace(/#/g, "")).slice(0, num) || '暂无简介'
 //处理时间
-const fmtTime = (time: any, fmt: string = 'MMMM D, YYYY') => dayjs(time).utc().format(fmt)
+const fmtTime = (time: ConfigType, fmt: string = 'MMMM D, YYYY') => dayjs(time).utc().format(fmt)
 // 处理日期
 const fmtDate = (time: string | Date, hours_status = true) => {
   const now = dayjs();
@@ -76,7 +77,7 @@ const LoadStyle = (href: string): Promise<HTMLLinkElement> => {
 }
 
 // 请求封装
-const $GET = async (url: string, headers: Record<string, string> = {}): Promise<any> => {
+const $GET = async <T>(url: string, headers: Record<string, string> = {}): Promise<T | undefined> => {
   try {
     const res = await fetch(url, { method: "GET", headers: headers, });
     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
@@ -86,7 +87,7 @@ const $GET = async (url: string, headers: Record<string, string> = {}): Promise<
   }
 };
 
-const $POST = async (url: string, data: Record<string, any>, headers: Record<string, string> = {}): Promise<any> => {
+const $POST = async <T>(url: string, data: Record<string, unknown>, headers: Record<string, string> = {}): Promise<T | undefined> => {
   try {
     const res = await fetch(url, { method: "POST", headers: { ...headers, }, body: JSON.stringify(data), });
     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
