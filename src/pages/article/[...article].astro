@@ -1,19 +1,25 @@
 ---
 import { getDescription, fmtTime } from "@/utils/index";
-import { getCollection } from "astro:content";
 import { render } from "astro:content";
+import { DEFAULT_LOCALE, type SiteLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { localizePath } from "@/i18n/routes";
+import { getBlogPosts } from "@/utils/blogCollection";
 export async function getStaticPaths() {
-	const posts = await getCollection("blog");
-	return posts.map((post: any) => ({ params: { article: post.data.id }, props: post }));
+	const locale: SiteLocale = DEFAULT_LOCALE;
+	const posts = await getBlogPosts(locale);
+	return posts.filter((post) => !post.data.hide).map((post) => ({ params: { article: post.data.id }, props: post }));
 }
 // 处理文章内容
-const post: any = Astro.props;
+const locale: SiteLocale = DEFAULT_LOCALE;
+const dict = getDictionary(locale);
+const post = Astro.props;
 // 获取封面图
 import getCover from "@/utils/getCover";
 const ARTICLE_COVER: string = await getCover(post.data.cover);
 // 获取文章数据
 import { getPrevNextPosts } from "@/utils/getPostInfo";
-const { prev, next } = getPrevNextPosts(post.data.id);
+const { prev, next } = await getPrevNextPosts(locale, String(post.data.id), dict.article.noMore);
 // 页面 Info
 import SITE_CONFIG from "@/config";
 const { Site, Title, Author, GoogleAds } = SITE_CONFIG;
@@ -48,11 +54,11 @@ import "@/styles/ArticleBase.less";
 			<div class="article-meta">
 				<span class="article-meta-item">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 12h3.5"></path><path d="M12 7v5"></path></svg>
-					<time>{fmtTime(post.data.date, "YYYY-MM-DD A")}</time>
+					<time>{fmtTime(post.data.date, "YYYY-MM-DD A", locale)}</time>
 					<span class="count"><strong>{article_word_count || "一点"}</strong>字</span>
 					<span class="time"><strong>{parseFloat((Number(reading_time) || 0).toFixed(1).replace(/\.0+$/, ""))}</strong>分钟</span>
 				</span>
-				<a class="article-meta-item" href={`/categories/${post.data.categories}`}>
+				<a class="article-meta-item" href={localizePath(`/categories/${post.data.categories}`, locale)}>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg>
 					<span>{post.data.categories}</span>
 				</a>
@@ -63,7 +69,7 @@ import "@/styles/ArticleBase.less";
 			<section class="tag-list">
 				{
 					(post.data.tags || []).map((i: any) => (
-						<a href={`/tag/${i}`}>
+						<a href={localizePath(`/tag/${i}`, locale)}>
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 								<path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
@@ -81,7 +87,7 @@ import "@/styles/ArticleBase.less";
 			<!-- 打赏组件 -->
 			<Reward />
 			<!-- 版权©️信息 -->
-			<Copyright site={Site} id={post.data.id} title={post.data.title} sitename={Title} time={fmtTime(post.data.date, "YYYY-MM-DD A")} auther={Author} />
+			<Copyright site={Site} id={post.data.id} title={post.data.title} sitename={Title} time={fmtTime(post.data.date, "YYYY-MM-DD A", locale)} auther={Author} />
 			<!-- 底部谷歌广告 -->
 			{GoogleAds.ad_Client && GoogleAds.articleAD_Slot && <GoogleAd className="vh-article-ad" slotID={GoogleAds.articleAD_Slot} />}
 		</footer>

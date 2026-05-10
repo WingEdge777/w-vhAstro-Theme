@@ -1,15 +1,20 @@
 ---
 import { getTagsList } from "@/utils/getArchive";
-import { getCollection } from "astro:content";
+import { DEFAULT_LOCALE, type SiteLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getBlogPosts } from "@/utils/blogCollection";
 export async function getStaticPaths(): Promise<any> {
-	const posts = await getCollection("blog");
+	const locale: SiteLocale = DEFAULT_LOCALE;
+	const posts = await getBlogPosts(locale);
 	let tagList: any = [];
-	posts.forEach(post => (tagList = [...tagList, ...(post.data.tags || [])]));
+	posts.filter((post) => !post.data.hide).forEach(post => (tagList = [...tagList, ...(post.data.tags || [])]));
 	return [...new Set(tagList)].map(tags => ({ params: { tags } }));
 }
 // 获取分类列表
+const locale: SiteLocale = DEFAULT_LOCALE;
+const dict = getDictionary(locale);
 const { tags } = Astro.params;
-const articleList = await getTagsList(tags);
+const articleList = await getTagsList(locale, tags);
 // 页面 Info
 import SITE_CONFIG from "@/config";
 const { Description } = SITE_CONFIG;
@@ -19,6 +24,6 @@ import Layout from "@/layouts/Layout/Layout.astro";
 import Archive from "@/components/Archive/Archive.astro";
 ---
 
-<Layout title={`标签 ${tags} 下的文章`} description={Description}>
+<Layout title={dict.tagPage.title(tags)} description={Description}>
 	<Archive articleList={articleList} />
 </Layout>

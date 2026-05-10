@@ -1,6 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 
-export type BlogEntry = CollectionEntry<"blog">;
+export type BlogCollectionKey = "blog" | "blogEn";
+export type BlogEntry = CollectionEntry<"blog"> | CollectionEntry<"blogEn">;
 export type BlogData = BlogEntry["data"];
 
 export type RenderableBlogEntry = Pick<BlogEntry, "body"> & {

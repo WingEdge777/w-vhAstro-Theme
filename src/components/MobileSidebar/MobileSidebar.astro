@@ -1,10 +1,15 @@
 ---
 import SITE_CONFIG from "@/config";
 const { Navs, Title } = SITE_CONFIG;
+import { getDictionary } from "@/i18n/dictionaries";
+import { getLocaleFromPathname, localizePath } from "@/i18n/routes";
 // Svg 组件
 import Svg from "@/components/Svg/Svg.astro";
 // 侧边栏 MobileSidebar 样式
 import "./MobileSidebar.less";
+
+const locale = getLocaleFromPathname(Astro.url.pathname);
+const dict = getDictionary(locale);
 ---
 
 <nav class="vh-mobilesidebar">
@@ -16,9 +21,9 @@ import "./MobileSidebar.less";
 		<div class="vh-mobilesidebar-list vh-link-list">
 			{
 				Navs.map(i => (
-					<a class={i.link.replace("/", "")} href={i.link} target={i.target ? "_blank" : "_self"}>
+					<a class={i.link.replace("/", "")} href={localizePath(i.link, locale)} target={i.target ? "_blank" : "_self"}>
 						<Svg src={i.icon} />
-						{i.text}
+						{dict.header.nav[i.key]}
 					</a>
 				))
 			}

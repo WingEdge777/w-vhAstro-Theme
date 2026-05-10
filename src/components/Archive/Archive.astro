@@ -1,9 +1,14 @@
 ---
 import { fmtTime } from "@/utils/index";
 import type { ArchiveGroup } from "@/type/blog";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getLocaleFromPathname, localizePath } from "@/i18n/routes";
 const { articleList } = Astro.props as { articleList: ArchiveGroup[] };
 // 文章页面样式
 import "./Archive.less";
+
+const locale = getLocaleFromPathname(Astro.url.pathname);
+const dict = getDictionary(locale);
 ---
 
 <section class="vh-archive-main vh-animation vh-animation-init">
@@ -14,10 +19,10 @@ import "./Archive.less";
 					<p class="title">
 						<em>{i.name}</em>
 						<i />
-						<span>{i.data.length}篇文章</span>
+						<span>{i.data.length}{dict.archive.articleCountSuffix}</span>
 					</p>
 					{i.data.map((post) => (
-						<a href={`/article/${post.id}`}>
+						<a href={localizePath(`/article/${post.id}`, locale)}>
 							<em>{fmtTime(post.date, "MM-DD")}</em>
 							<i />
 							<span class="vh-ellipsis">{post.title}</span>

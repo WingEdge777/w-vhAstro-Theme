@@ -21,6 +21,7 @@ pnpm-debug.log*
 .DS_Store
 test/
 /public/vh-search.json
+/public/vh-search.en.json
 # Tencent Cloud EdgeOne
 .env
 .edgeone

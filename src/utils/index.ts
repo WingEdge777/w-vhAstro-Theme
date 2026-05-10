@@ -2,15 +2,21 @@ import dayjs, { type ConfigType } from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import timezone from "dayjs/plugin/timezone.js";
 import type { RenderableBlogEntry } from "@/type/blog";
+import type { SiteLocale } from "@/i18n/config";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 // 设置中文语言环境
 import 'dayjs/locale/zh-cn'
+import 'dayjs/locale/en'
 dayjs.locale('zh-cn');
 // 获取文章的描述
 const getDescription = (post: RenderableBlogEntry, num: number = 150) => (post.rendered ? post.rendered.html.replace(/<[^>]+>/g, "").replace(/\s+/g, "") : post.body.replace(/\n/g, "").replace(/#/g, "")).slice(0, num) || '暂无简介'
 //处理时间
-const fmtTime = (time: ConfigType, fmt: string = 'MMMM D, YYYY') => dayjs(time).utc().format(fmt)
+const fmtTime = (
+  time: ConfigType,
+  fmt: string = 'MMMM D, YYYY',
+  locale: SiteLocale = "zh-CN"
+) => dayjs(time).locale(locale === "en" ? "en" : "zh-cn").utc().format(fmt)
 // 处理日期
 const fmtDate = (time: string | Date, hours_status = true) => {
   const now = dayjs();
@@ -39,7 +45,7 @@ const fmtDate = (time: string | Date, hours_status = true) => {
 };
 
 // 处理页码展示
-const fmtPage = (page: string | undefined) => page ? page.replace(/\//g, '') : null
+const fmtPage = (page: string | undefined) => page ? (page.match(/\/(\d+)$/)?.[1] || null) : null
 // 加载外部脚本
 const LoadScript = (
   src: string,

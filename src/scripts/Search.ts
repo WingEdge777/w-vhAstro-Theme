@@ -1,8 +1,14 @@
 import { $GET } from '@/utils/index'
+import { DEFAULT_LOCALE } from '@/i18n/config';
+import { getLocaleFromPathname } from '@/i18n/routes';
 
 // 更新数据
 let searchJson: any[] = [];
-const getSearchJson = async () => (searchJson = await $GET('/vh-search.json'))
+const getSearchJson = async () => {
+  const locale = getLocaleFromPathname(window.location.pathname);
+  const searchFile = locale === DEFAULT_LOCALE ? '/vh-search.json' : `/vh-search.${locale}.json`;
+  searchJson = (await $GET(searchFile)) || [];
+}
 
 // 搜索
 const searchFn = async (value: string) => {

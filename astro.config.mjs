@@ -56,8 +56,4 @@ export default defineConfig({
 	vite: { resolve: { alias: { "@": path.resolve(__dirname, "./src") } } },
 	server: { host: '127.0.0.1' },
 	trailingSlash: "never",
-	i18n: {
-		locales: ["zh-CN", "en"],
-		defaultLocale: "zh-CN",
-	}
 });

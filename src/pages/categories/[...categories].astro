@@ -1,15 +1,20 @@
 ---
 import { getCategoriesList } from "@/utils/getArchive";
-import { getCollection } from "astro:content";
+import { DEFAULT_LOCALE, type SiteLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getBlogPosts } from "@/utils/blogCollection";
 export async function getStaticPaths(): Promise<any> {
-	const posts = await getCollection("blog");
-	return [...new Set(posts.map((post: any) => post.data.categories))].map((categories) => ({
+	const locale: SiteLocale = DEFAULT_LOCALE;
+	const posts = await getBlogPosts(locale);
+	return [...new Set(posts.filter((post) => !post.data.hide).map((post: any) => post.data.categories))].map((categories) => ({
 		params: { categories },
 	}));
 }
 // 获取分类列表
+const locale: SiteLocale = DEFAULT_LOCALE;
+const dict = getDictionary(locale);
 const { categories } = Astro.params;
-const articleList = await getCategoriesList(categories);
+const articleList = await getCategoriesList(locale, categories);
 // 页面 Info
 import SITE_CONFIG from "@/config";
 const { Description } = SITE_CONFIG;
@@ -19,6 +24,6 @@ import Layout from "@/layouts/Layout/Layout.astro";
 import Archive from "@/components/Archive/Archive.astro";
 ---
 
-<Layout title={`分类 ${categories} 下的文章`} description={Description} activeNav="categories">
+<Layout title={dict.categoryPage.title(categories)} description={Description} activeNav="categories">
 	<Archive articleList={articleList} />
 </Layout>

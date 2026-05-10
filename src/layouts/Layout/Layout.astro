@@ -4,6 +4,8 @@ const { title, keywords, description, pagecover, activeNav, Home, headings, publ
 import SITE_INFO from "@/config";
 const { GoogleAds, Theme, HomeBanner } = SITE_INFO;
 const { ad_Client, asideAD_Slot, articleAD_Slot } = GoogleAds;
+import { getDictionary } from "@/i18n/dictionaries";
+import { getLocaleFromPathname } from "@/i18n/routes";
 // Head 依赖
 import Head from "@/components/Head/Head.astro";
 // 顶部 Header
@@ -31,6 +33,8 @@ const optimizedBanner = await getImage({
     densities: [1], 
 });
 const homeBannerStyle = `url('${optimizedBanner.src}') no-repeat center 60%/cover`;
+const locale = getLocaleFromPathname(Astro.url.pathname);
+const dict = getDictionary(locale);
 
 
 // A Modern CSS Reset
@@ -41,8 +45,8 @@ import "@/styles/Base.less";
 import "./Layout.less";
 ---
 
-<html lang="zh-CN">
-	<Head Title={title} Keywords={keywords} Description={description} PageCover={pagecover} PublishedTime={publishedTime} ModifiedTime={modifiedTime}>
+<html lang={locale}>
+	<Head Title={title} Keywords={keywords} Description={description || dict.site.description} PageCover={pagecover} PublishedTime={publishedTime} ModifiedTime={modifiedTime}>
 		<!-- 谷歌广告JS加载项 -->
 		{ad_Client && (asideAD_Slot || articleAD_Slot) && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ad_Client}`} crossorigin="anonymous" />}
 		<!-- 彩旗🎈 -->

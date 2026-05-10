@@ -1,6 +1,11 @@
 ---
 import SITE_INFO from "@/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getLocaleFromPathname } from "@/i18n/routes";
 import "./MainHeader.less";
+
+const locale = getLocaleFromPathname(Astro.url.pathname);
+const dict = getDictionary(locale);
 ---
 
 <div class="header-main">
@@ -8,5 +13,5 @@ import "./MainHeader.less";
 		<img src="/assets/images/lazy-loading.webp" data-vh-lz-src={SITE_INFO.Avatar} alt="avatar" fetchpriority="high"/>
 	</div>
 	<h3 class="auther">{SITE_INFO.Author || "-"}</h3>
-	<p class="desc"></p>
+	<p class="desc" data-typewrite={JSON.stringify(dict.typewrite)}></p>
 </div>

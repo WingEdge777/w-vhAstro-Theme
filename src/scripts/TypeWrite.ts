@@ -1,8 +1,7 @@
-import SITE_INFO from '@/config';
 export default () => {
   const writeDom = document.querySelector('.header-main>.desc');
   if (!writeDom) return;
-  const TypeWriteList: any = SITE_INFO.TypeWriteList;
+  const TypeWriteList = JSON.parse(writeDom.getAttribute('data-typewrite') || '[]');
   if (!Array.isArray(TypeWriteList) || !TypeWriteList.length) return writeDom.remove();
   let TypeWriteListIndex = 0;
   let index = 0;

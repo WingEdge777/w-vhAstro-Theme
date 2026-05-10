@@ -1,14 +1,17 @@
 import { getRssString } from '@astrojs/rss';
-import { getCollection } from 'astro:content';
 import { getDescription } from '@/utils/index'
+import { DEFAULT_LOCALE, type SiteLocale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/dictionaries';
 import SITE_CONFIG from '@/config';
-const { Title, Description } = SITE_CONFIG;
+import { getBlogPosts } from '@/utils/blogCollection';
+const locale: SiteLocale = DEFAULT_LOCALE;
+const dict = getDictionary(locale);
 
 export async function GET(context: any) {
-	const posts = await getCollection('blog');
+	const posts = await getBlogPosts(locale);
 	const res = await getRssString({
-		title: Title,
-		description: Description,
+		title: dict.site.title,
+		description: dict.site.description,
 		site: context.site,
 		items: posts.filter(i => !i.data.hide).map((post) => ({
 			title: post.data.title,

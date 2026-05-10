@@ -15,11 +15,6 @@ export default {
   Motto: '',
   // Cover 网站缩略图
   Cover: '/assets/images/banner/7b1491d13dfb97a4.webp',
-  // 首页打字机文案列表
-  TypeWriteList: [
-    '活到老，学到老',
-    "stay hungry, stay foolish",
-  ],
   // 网站创建时间
   CreateTime: '2025-11-06',
   // 顶部 Banner 配置
@@ -50,12 +45,12 @@ export default {
   Navs: [
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
     // 建议使用 https://tabler.io/icons 直接下载 SVG
-    { text: 'Blog', link: '/', icon: 'Nav_archives' },
-    { text: 'Link', link: '/links', icon: 'Nav_friends' },
-    { text: 'Moment', link: '/talking', icon: 'Nav_talking' },
-    { text: 'Archive', link: '/archives', icon: 'Nav_archives' },
-    { text: 'Message', link: '/message', icon: 'Nav_message' },
-    { text: 'About', link: '/about', icon: 'Nav_about' },
+    { key: 'blog', text: 'Blog', link: '/', icon: 'Nav_archives' },
+    { key: 'links', text: 'Link', link: '/links', icon: 'Nav_friends' },
+    { key: 'talking', text: 'Moment', link: '/talking', icon: 'Nav_talking' },
+    { key: 'archives', text: 'Archive', link: '/archives', icon: 'Nav_archives' },
+    { key: 'message', text: 'Message', link: '/message', icon: 'Nav_message' },
+    { key: 'about', text: 'About', link: '/about', icon: 'Nav_about' },
   ],
   // 侧边栏个人网站
   WebSites: [
@@ -102,9 +97,9 @@ export default {
   // 文章内赞赏码
   Reward: {
     // 支付宝收款码
-    AliPay: '/assets/images/alipay.webp',
+    AliPay: '/assets/images/alipay.jpg',
     // 微信收款码
-    WeChat: '/assets/images/wechat.webp'
+    WeChat: '/assets/images/wechat.jpg'
   },
   // 访问网页 自动推送到搜索引擎
   SeoPush: {
