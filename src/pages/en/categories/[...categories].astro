@@ -1,0 +1,26 @@
+---
+import { getCategoriesList } from "@/utils/getArchive";
+import { type SiteLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getBlogPosts } from "@/utils/blogCollection";
+
+const locale: SiteLocale = "en";
+
+export async function getStaticPaths(): Promise<any> {
+	const locale: SiteLocale = "en";
+	const posts = await getBlogPosts(locale);
+	return [...new Set(posts.filter((post) => !post.data.hide).map((post: any) => post.data.categories))].map((categories) => ({
+		params: { categories },
+	}));
+}
+
+const dict = getDictionary(locale);
+const { categories } = Astro.params;
+const articleList = await getCategoriesList(locale, categories);
+import Layout from "@/layouts/Layout/Layout.astro";
+import Archive from "@/components/Archive/Archive.astro";
+---
+
+<Layout title={dict.categoryPage.title(categories)} description={dict.site.description} activeNav="categories">
+	<Archive articleList={articleList} />
+</Layout>

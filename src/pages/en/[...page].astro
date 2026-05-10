@@ -1,0 +1,40 @@
+---
+import type { GetStaticPathsOptions } from "astro";
+import setSearchJson from "@/utils/vhSearch";
+import moveTopToFirst from "@/utils/moveTopToFirst";
+import { fmtPage } from "@/utils/index";
+import { type SiteLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getBlogPosts } from "@/utils/blogCollection";
+
+const locale: SiteLocale = "en";
+
+export async function getStaticPaths(options: GetStaticPathsOptions) {
+	const locale: SiteLocale = "en";
+	const { paginate } = options;
+	const posts = await getBlogPosts(locale);
+	moveTopToFirst(posts);
+	await setSearchJson(posts, locale);
+	return paginate(
+		posts.filter(i => !i.data.hide),
+		{ pageSize: 10 }
+	);
+}
+
+const { page } = Astro.props;
+const { data, ...page_data } = page;
+import ArticleCard from "@/components/ArticleCard/ArticleCard.astro";
+import Layout from "@/layouts/Layout/Layout.astro";
+import Pagination from "@/components/Pagination/Pagination.astro";
+const dict = getDictionary(locale);
+const currentPage = fmtPage(page_data.url.current);
+---
+
+<Layout title={currentPage ? dict.listPage.pageTitle(currentPage) : ""} description={dict.site.description} Home={true}>
+	<section class="article-list-main">
+		<section class="article-list">
+			{data.map((post, index) => <ArticleCard post={post} index={index} />)}
+		</section>
+		<Pagination data={page_data.url} />
+	</section>
+</Layout>

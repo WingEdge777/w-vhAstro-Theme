@@ -1,0 +1,26 @@
+---
+import { getTagsList } from "@/utils/getArchive";
+import { type SiteLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getBlogPosts } from "@/utils/blogCollection";
+
+const locale: SiteLocale = "en";
+
+export async function getStaticPaths(): Promise<any> {
+	const locale: SiteLocale = "en";
+	const posts = await getBlogPosts(locale);
+	let tagList: any = [];
+	posts.filter((post) => !post.data.hide).forEach(post => (tagList = [...tagList, ...(post.data.tags || [])]));
+	return [...new Set(tagList)].map(tags => ({ params: { tags } }));
+}
+
+const dict = getDictionary(locale);
+const { tags } = Astro.params;
+const articleList = await getTagsList(locale, tags);
+import Layout from "@/layouts/Layout/Layout.astro";
+import Archive from "@/components/Archive/Archive.astro";
+---
+
+<Layout title={dict.tagPage.title(tags)} description={dict.site.description}>
+	<Archive articleList={articleList} />
+</Layout>

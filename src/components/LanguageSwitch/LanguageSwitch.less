@@ -1,0 +1,48 @@
+.vh-lang-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 5.2rem;
+  height: 2rem;
+  border-radius: 0.56rem;
+  background: transparent;
+
+  &>select {
+    appearance: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    padding: 0.288rem 1.6rem 0.288rem 0.52rem;
+    width: 100%;
+    height: 100%;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--vh-font-color);
+    background: transparent;
+    border: none;
+    border-radius: 0.56rem;
+    cursor: pointer;
+  }
+
+  &>svg {
+    position: absolute;
+    right: 0.42rem;
+    width: 0.92rem;
+    height: 0.92rem;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: var(--vh-main-color-6);
+  }
+
+  &:focus-within {
+    background: var(--vh-main-color-16);
+  }
+}
+
+@media screen and (max-width: 888px) {
+  .vh-lang-switch {
+    box-sizing: border-box;
+    display: none;
+  }
+}

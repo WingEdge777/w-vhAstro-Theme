@@ -1,0 +1,64 @@
+---
+import Layout from "@/layouts/Layout/Layout.astro";
+
+const zhCN = {
+	title: "404 Not Found",
+	desc: "你来到了一个不存在的页面。",
+	body: "你来到了一个不存在的页面。",
+};
+
+const en = {
+	title: "404 Not Found",
+	desc: "The page you are looking for does not exist.",
+	body: "You reached a page that does not exist.",
+};
+---
+
+<Layout title={zhCN.title} description={zhCN.desc}>
+	<section
+		class="vh-page vh-about vh-animation vh-animation-init"
+		id="vh-404"
+		data-title-zh={zhCN.title}
+		data-desc-zh={zhCN.desc}
+		data-body-zh={zhCN.body}
+		data-title-en={en.title}
+		data-desc-en={en.desc}
+		data-body-en={en.body}
+	>
+		<header class="vh-page-header">
+			<h1 id="vh-404-title">{zhCN.title}</h1>
+			<p id="vh-404-desc">{zhCN.desc}</p>
+		</header>
+		<main>
+			<section class="vh-note vh-error">
+				<div class="vh-note-content">
+					<p id="vh-404-body">{zhCN.body}</p>
+				</div>
+			</section>
+		</main>
+	</section>
+	<script is:inline>
+		const wrap = document.getElementById("vh-404");
+		if (wrap) {
+			const isEn = /^\/en(?:\/|$)/.test(window.location.pathname);
+			const lang = isEn ? "en" : "zh";
+			const title = wrap.dataset[`title${lang === "en" ? "En" : "Zh"}`];
+			const desc = wrap.dataset[`desc${lang === "en" ? "En" : "Zh"}`];
+			const body = wrap.dataset[`body${lang === "en" ? "En" : "Zh"}`];
+			const titleDOM = document.getElementById("vh-404-title");
+			const descDOM = document.getElementById("vh-404-desc");
+			const bodyDOM = document.getElementById("vh-404-body");
+			const descMeta = document.querySelector('meta[name="description"]');
+			const ogDescMeta = document.querySelector('meta[property="og:description"]');
+			const twitterDescMeta = document.querySelector('meta[name="twitter:description"]');
+			if (title && titleDOM) titleDOM.textContent = title;
+			if (desc && descDOM) descDOM.textContent = desc;
+			if (body && bodyDOM) bodyDOM.textContent = body;
+			if (desc && descMeta) descMeta.setAttribute("content", desc);
+			if (desc && ogDescMeta) ogDescMeta.setAttribute("content", desc);
+			if (desc && twitterDescMeta) twitterDescMeta.setAttribute("content", desc);
+			if (title) document.title = `${title} | WingEdge777's Blog`;
+			document.documentElement.lang = isEn ? "en" : "zh-CN";
+		}
+	</script>
+</Layout>
