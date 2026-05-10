@@ -40,7 +40,6 @@ tags: ["tag"]
 id: "${articleID}"
 date: ${articleDate}
 cover: "/assets/images/banner/${banner}"
-hide: true
 ---
 
 :::note{type="info"}
