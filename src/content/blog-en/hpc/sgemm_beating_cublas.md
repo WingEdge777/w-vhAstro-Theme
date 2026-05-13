@@ -1,5 +1,5 @@
 ---
-title: "[CUDA 优化实战] sgemm - 超越 cuBLAS：带你学会极致优化的矩阵乘法 cuda c++ 实现"
+title: "[CUDA in Practice] SGEMM — Beating cuBLAS: A Deep Dive into Peak-Performance Matrix Multiplication in Pure CUDA C++"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "ce4e1621e32a7b08"
