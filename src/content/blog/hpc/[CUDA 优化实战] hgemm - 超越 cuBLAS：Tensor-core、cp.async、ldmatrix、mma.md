@@ -1,7 +1,7 @@
 ---
 title: "[CUDA 优化实战] hgemm - 超越 cuBLAS：Tensor-core、cp.async、ldmatrix、mma"
-categories: "分类"
-tags: ["标签"]
+categories: "code"
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "5a219c62549f9573"
 date: 2026-05-10 14:29:19
 cover: "/assets/images/banner/16062e6599b2ea8b.webp"

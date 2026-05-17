@@ -1,7 +1,7 @@
 ---
 title: "[CUDA 优化实战] sgemm - 超越 cuBLAS：带你学会极致优化的矩阵乘法 cuda c++ 实现"
 categories: "code"
-tags:  ["vitamin-cuda","cuda","c++", "GPU"]
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "ce4e1621e32a7b08"
 date: 2026-03-05 17:47:31
 cover: "/assets/images/banner/97a81c5f24c3e4cd.webp"

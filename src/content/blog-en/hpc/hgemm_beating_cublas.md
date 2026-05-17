@@ -1,7 +1,7 @@
 ---
 title: "[CUDA in Practice] HGEMM — Beating cuBLAS: Tensor Core, cp.async, ldmatrix, mma"
 categories: "code"
-tags:  ["vitamin-cuda","cuda","c++", "GPU"]
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "5a219c62549f9573"
 date: 2026-05-10 14:29:19
 cover: "/assets/images/banner/16062e6599b2ea8b.webp"

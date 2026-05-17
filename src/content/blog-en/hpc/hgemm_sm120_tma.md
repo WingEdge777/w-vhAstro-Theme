@@ -1,7 +1,7 @@
 ---
 title: "[CUDA in Practice] HGEMM SM120 — Micro-Sculpture Warfare in 100KB SMEM: Tensor Core, TMA, ldmatrix, mma"
 categories: "code"
-tags:  ["vitamin-cuda","cuda","c++", "GPU"]
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "b2ab376d19f52ff4"
 date: 2026-05-10 14:32:05
 cover: "/assets/images/banner/97a81c5f24c3e4cd.webp"

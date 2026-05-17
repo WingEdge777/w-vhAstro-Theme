@@ -1,7 +1,7 @@
 ---
 title: "[CUDA 优化实战] hgemm sm120 - 100KB SMEM 中的“微雕”战争：Tensor-core、TMA、ldmatrix、mma"
-categories: "分类"
-tags: ["标签"]
+categories: "code"
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "b2ab376d19f52ff4"
 date: 2026-05-10 14:32:05
 cover: "/assets/images/banner/97a81c5f24c3e4cd.webp"

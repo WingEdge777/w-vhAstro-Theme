@@ -1,7 +1,7 @@
 ---
 title: "[CUDA 优化实战] sgemm tf32 - 超越 cuBLAS：Tensor-core、cp.async、ldmatrix、mma"
 categories: "code"
-tags:  ["vitamin-cuda","cuda","c++", "GPU"]
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "ba9e9d9171004edc"
 date: 2026-05-09 10:14:49
 cover: "/assets/images/banner/ffb19a0b01ca0be7.png"

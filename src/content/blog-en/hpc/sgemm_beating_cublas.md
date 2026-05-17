@@ -1,7 +1,7 @@
 ---
 title: "[CUDA in Practice] SGEMM — Beating cuBLAS: A Deep Dive into Peak-Performance Matrix Multiplication in Pure CUDA C++"
 categories: "code"
-tags:  ["vitamin-cuda","cuda","c++", "GPU"]
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "ce4e1621e32a7b08"
 date: 2026-03-05 17:47:31
 cover: "/assets/images/banner/97a81c5f24c3e4cd.webp"

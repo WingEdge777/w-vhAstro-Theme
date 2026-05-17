@@ -1,7 +1,7 @@
 ---
 title: "[CUDA in Practice] SGEMM TF32 — Beating cuBLAS with Tensor Cores, cp.async, ldmatrix & mma"
 categories: "code"
-tags:  ["vitamin-cuda","cuda","c++", "GPU"]
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "ba9e9d9171004edc"
 date: 2026-05-09 10:14:49
 cover: "/assets/images/banner/ffb19a0b01ca0be7.png"
