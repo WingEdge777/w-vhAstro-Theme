@@ -1,7 +1,7 @@
 ---
 title: "[CUDA 优化实战] fmha sm120 : 超越 torch.sdpa(flash-attention-2)"
-categories: "分类"
-tags: ["标签"]
+categories: "code"
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM", "flash attention"]
 id: "7d1151d07a70e2c9"
 date: 2026-05-19 21:56:50
 cover: "/assets/images/banner/b1f70c4c0fd99486.webp"

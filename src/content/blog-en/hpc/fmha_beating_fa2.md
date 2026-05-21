@@ -1,7 +1,7 @@
 ---
 title: "[CUDA in Practice] FMHA on SM120: Beating torch.sdpa (FlashAttention-2)"
-categories: "category"
-tags: ["tag"]
+categories: "code"
+tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM", "flash attention"]
 id: "7d1151d07a70e2c9"
 date: 2026-05-19 21:56:50
 cover: "/assets/images/banner/b1f70c4c0fd99486.webp"
