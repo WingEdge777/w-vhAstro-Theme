@@ -9,7 +9,7 @@ const dict = getDictionary(locale);
 ---
 
 <label class="vh-lang-switch" aria-label={dict.header.localeLabel}>
-	<select onchange="if(this.value) window.location.href=this.value">
+	<select onchange="if(this.value){sessionStorage.setItem('lang_resolved','1');window.location.href=this.value}">
 		{
 			LOCALES.map((item) => (
 				<option value={switchLocalePath(Astro.url.pathname, item)} selected={item === locale}>
