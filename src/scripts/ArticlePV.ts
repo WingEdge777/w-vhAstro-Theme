@@ -1,11 +1,16 @@
+import SITE_INFO from "@/config";
+
 const PV_ELEMENT_ID = "twikoo_visitors";
 
-const fetchPV = async (envId: string) => {
+const fetchPV = async () => {
   const el = document.getElementById(PV_ELEMENT_ID);
   if (!el) return;
 
+  const proxyApi = SITE_INFO.Comment.Twikoo?.proxyPath;
+  if (!proxyApi) return;
+
   try {
-    const res = await fetch(envId, {
+    const res = await fetch(proxyApi, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

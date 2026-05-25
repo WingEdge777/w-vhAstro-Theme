@@ -83,7 +83,8 @@ export default {
     // Twikoo 评论
     Twikoo: {
       enable: true,
-      envId: '/api/twikoo'
+      envId: 'https://twikoo.wingedge777.com',
+      proxyPath: '/api/twikoo'
     }
   },
   // Google 广告
