@@ -6,8 +6,8 @@ declare const twikoo: any;
 
 const TwikooFn = async (commentDOM: string) => {
   document.querySelector(commentDOM)!.innerHTML = '<section class="vh-space-loading"><span></span><span></span><span></span></section>'
-  await LoadScript("https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js");
-  twikoo.init({ envId: SITE_INFO.Comment.Twikoo.envId, el: commentDOM, onCommentLoaded: () => { setTimeout(() => document.querySelectorAll('.vh-comment a[href="#"]').forEach(link => link.removeAttribute('href'))); fetchPV(); } })
+  await LoadScript("https://cdn.jsdelivr.net/npm/twikoo@1.7.9/dist/twikoo.min.js");
+  twikoo.init({ envId: SITE_INFO.Comment.Twikoo.envId, el: commentDOM, onCommentLoaded: () => { setTimeout(() => document.querySelectorAll('.vh-comment a[href="#"]').forEach(link => link.removeAttribute('href'))); fetchPV(SITE_INFO.Comment.Twikoo.envId); } })
 }
 
 // 检查是否开启评论
