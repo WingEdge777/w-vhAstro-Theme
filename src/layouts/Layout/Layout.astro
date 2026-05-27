@@ -1,5 +1,5 @@
 ---
-const { title, keywords, description, pagecover, activeNav, Home, headings, publishedTime, modifiedTime } = Astro.props;
+const { title, keywords, description, pagecover, activeNav, Home, headings, publishedTime, modifiedTime, availableLocales } = Astro.props;
 // 网站配置
 import SITE_INFO from "@/config";
 const { GoogleAds, Theme, HomeBanner } = SITE_INFO;
@@ -60,7 +60,7 @@ import "./Layout.less";
 	</Head>
 	<body>
 		<MobileSidebar headings={headings}/>
-		<Header activeNav={activeNav} />
+		<Header activeNav={activeNav} availableLocales={availableLocales} />
 		<main class="main">
 			{HomeBanner.enable && <MainHeader />}
 			<section class="main-inner" style={`padding-top:${HomeBanner.enable ? "0.88rem" : "calc(66px + 0.68rem)"}`}>

@@ -5,6 +5,7 @@ import { DEFAULT_LOCALE, type SiteLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizePath } from "@/i18n/routes";
 import { getBlogPosts } from "@/utils/blogCollection";
+import { getAvailableLocales } from "@/i18n/availableLocales";
 export async function getStaticPaths() {
 	const locale: SiteLocale = DEFAULT_LOCALE;
 	const posts = await getBlogPosts(locale);
@@ -14,6 +15,7 @@ export async function getStaticPaths() {
 const locale: SiteLocale = DEFAULT_LOCALE;
 const dict = getDictionary(locale);
 const post = Astro.props;
+const availableLocales = await getAvailableLocales(`/article/${post.data.id}`);
 // 获取封面图
 import getCover from "@/utils/getCover";
 const ARTICLE_COVER: string = await getCover(post.data.cover);
@@ -47,7 +49,7 @@ import "@/styles/Article.less";
 import "@/styles/ArticleBase.less";
 ---
 
-<Layout title={post.data.title} keywords={post.data.tags} description={description} pagecover={ARTICLE_COVER} headings={headings} publishedTime={post.data.date} modifiedTime={post.data.updated || post.data.date}>
+<Layout title={post.data.title} keywords={post.data.tags} description={description} pagecover={ARTICLE_COVER} headings={headings} publishedTime={post.data.date} modifiedTime={post.data.updated || post.data.date} availableLocales={availableLocales}>
 	<article class="vh-article-main vh-animation vh-animation-init">
 		<header>
 			<h1>{post.data.title}</h1>

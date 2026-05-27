@@ -3,6 +3,7 @@ const { frontmatter } = Astro.props;
 // 页面 Info
 import SITE_CONFIG from "@/config";
 const { Title } = SITE_CONFIG;
+import { DEFAULT_LOCALE } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLocaleFromPathname } from "@/i18n/routes";
 // 公共 Layout
@@ -21,7 +22,7 @@ const locale = getLocaleFromPathname(Astro.url.pathname);
 const dict = getDictionary(locale);
 ---
 
-<Layout title={frontmatter.title || Title} description={frontmatter.desc || dict.site.description} activeNav={frontmatter.type || "-"}>
+<Layout title={frontmatter.title || Title} description={frontmatter.desc || dict.site.description} activeNav={frontmatter.type || "-"} availableLocales={[DEFAULT_LOCALE, "en"] as const}>
 	<section class="vh-page vh-about vh-animation vh-animation-init">
 		<header class="vh-page-header">
 			<h1>{frontmatter.h1}</h1>

@@ -36,7 +36,7 @@ import Pagination from "@/components/Pagination/Pagination.astro";
 const currentPage = fmtPage(page_data.url.current);
 ---
 
-<Layout title={currentPage ? dict.listPage.pageTitle(currentPage) : ""} description={Description} Home={true}>
+<Layout title={currentPage ? dict.listPage.pageTitle(currentPage) : ""} description={Description} Home={true} availableLocales={[DEFAULT_LOCALE, "en"] as const}>
 	<section class="article-list-main">
 		<section class="article-list">
 			<!-- 文章列表 -->

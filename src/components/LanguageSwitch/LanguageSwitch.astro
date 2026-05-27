@@ -1,9 +1,10 @@
 ---
-import { LOCALES } from "@/i18n/config";
+import { LOCALES, type SiteLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLocaleFromPathname, switchLocalePath } from "@/i18n/routes";
 import "./LanguageSwitch.less";
 
+const { availableLocales = LOCALES as readonly SiteLocale[] } = Astro.props;
 const locale = getLocaleFromPathname(Astro.url.pathname);
 const dict = getDictionary(locale);
 ---
@@ -11,7 +12,7 @@ const dict = getDictionary(locale);
 <label class="vh-lang-switch" aria-label={dict.header.localeLabel}>
 	<select onchange="if(this.value){window.location.href=this.value}">
 		{
-			LOCALES.map((item) => (
+			availableLocales.map((item) => (
 				<option value={switchLocalePath(Astro.url.pathname, item)} selected={item === locale}>
 					{item === "zh-CN" ? "中文" : "English"}
 				</option>

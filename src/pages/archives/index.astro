@@ -15,7 +15,7 @@ import Layout from "@/layouts/Layout/Layout.astro";
 import Archive from "@/components/Archive/Archive.astro";
 ---
 
-<Layout title={dict.archivesPage.title} description={Description} activeNav="archives">
+<Layout title={dict.archivesPage.title} description={Description} activeNav="archives" availableLocales={[DEFAULT_LOCALE, "en"] as const}>
 	<section class="vh-container">
 		<Archive articleList={articleList} />
 	</section>

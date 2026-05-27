@@ -1,6 +1,6 @@
 ---
 import { getArchiveList } from "@/utils/getArchive";
-import { type SiteLocale } from "@/i18n/config";
+import { DEFAULT_LOCALE, type SiteLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
 const locale: SiteLocale = "en";
@@ -10,7 +10,7 @@ import Layout from "@/layouts/Layout/Layout.astro";
 import Archive from "@/components/Archive/Archive.astro";
 ---
 
-<Layout title={dict.archivesPage.title} description={dict.site.description} activeNav="archives">
+<Layout title={dict.archivesPage.title} description={dict.site.description} activeNav="archives" availableLocales={[DEFAULT_LOCALE, "en"] as const}>
 	<section class="vh-container">
 		<Archive articleList={articleList} />
 	</section>

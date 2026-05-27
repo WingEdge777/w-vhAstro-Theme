@@ -3,6 +3,7 @@ import { getCategoriesList } from "@/utils/getArchive";
 import { type SiteLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getBlogPosts } from "@/utils/blogCollection";
+import { getAvailableLocales } from "@/i18n/availableLocales";
 
 const locale: SiteLocale = "en";
 
@@ -17,10 +18,11 @@ export async function getStaticPaths(): Promise<any> {
 const dict = getDictionary(locale);
 const { categories } = Astro.params;
 const articleList = await getCategoriesList(locale, categories);
+const availableLocales = await getAvailableLocales(`/categories/${categories}`);
 import Layout from "@/layouts/Layout/Layout.astro";
 import Archive from "@/components/Archive/Archive.astro";
 ---
 
-<Layout title={dict.categoryPage.title(categories)} description={dict.site.description} activeNav="categories">
+<Layout title={dict.categoryPage.title(categories)} description={dict.site.description} activeNav="categories" availableLocales={availableLocales}>
 	<Archive articleList={articleList} />
 </Layout>
