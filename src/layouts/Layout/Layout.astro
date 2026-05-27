@@ -46,7 +46,7 @@ import "./Layout.less";
 ---
 
 <html lang={locale}>
-	<Head Title={title} Keywords={keywords} Description={description || dict.site.description} PageCover={pagecover} PublishedTime={publishedTime} ModifiedTime={modifiedTime}>
+	<Head Title={title} Keywords={keywords} Description={description || dict.site.description} PageCover={pagecover} PublishedTime={publishedTime} ModifiedTime={modifiedTime} availableLocales={availableLocales}>
 		<!-- 谷歌广告JS加载项 -->
 		{ad_Client && (asideAD_Slot || articleAD_Slot) && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ad_Client}`} crossorigin="anonymous" />}
 		<!-- 彩旗🎈 -->
