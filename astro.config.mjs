@@ -35,8 +35,21 @@ export default defineConfig({
 		globalInstance: true
 	}),
 	sitemap({
-		// 处理末尾带 / 的 url
-		serialize: (item) => ({ ...item, url: item.url.endsWith('/') ? item.url.slice(0, -1) : item.url })
+		serialize: (item) => {
+			if (item.url.endsWith('/')) item.url = item.url.slice(0, -1);
+			const { origin, pathname } = new URL(item.url);
+			const isEn = pathname === '/en' || pathname.startsWith('/en/');
+			const hasBilingual = /^\/(en\/)?(article\/|$|about$|links$|message$|archives$|talking$)/.test(pathname);
+			if (hasBilingual) {
+				const zhPath = isEn ? (pathname === '/en' ? '/' : pathname.slice(3) || '/') : pathname;
+				const enPath = isEn ? pathname : ('/en' + (pathname === '/' ? '' : pathname));
+				item.links = [
+					{ lang: 'zh-CN', url: origin + zhPath },
+					{ lang: 'en', url: origin + enPath },
+				];
+			}
+			return item;
+		}
 	}),
 	mdx({ extendMarkdownConfig: false }),
 	Compressor({ gzip: false, brotli: true, fileExtensions: [".html", ".css", ".js"] })
