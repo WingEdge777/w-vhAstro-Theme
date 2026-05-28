@@ -8,7 +8,7 @@ cover: "/assets/images/banner/b1f70c4c0fd99486.webp"
 ---
 
 :::note
-本文适用于有一定 CUDA 编程基础，熟悉 GEMM/multi-head-attention 优化，对进阶 tensor core / 嵌入 PTX 指令 性能调优感兴趣的读者阅读
+本文适用于有一定 CUDA 编程基础，熟悉 GEMM/multi-head-attention 优化，对进阶 tensor core / 嵌入 PTX 指令 性能调优感兴趣的读者阅读。
 
 实际上阅读本文前最好先阅读本人先发布的 hgemm sm120 、safe online softmax 以及 gemm 系列文章。因为可能有重合的知识点，本人就一笔带过了，而朋友们还云里雾里。
 
