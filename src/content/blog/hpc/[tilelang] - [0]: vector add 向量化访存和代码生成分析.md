@@ -1,7 +1,7 @@
 ---
 title: "[TileLang] 0: vector add 向量化访存和生成代码分析"
 categories: "code"
-tags: ["cuda", "TileLang", "element_wise"]
+tags: ["CUDA", "TileLang", "Element-Wise"]
 id: "1dd8ab388e48946c"
 date: 2026-06-02 19:55:52
 cover: "/assets/images/banner/2cc757cc144b109f.webp"
