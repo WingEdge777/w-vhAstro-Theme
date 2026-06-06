@@ -4,7 +4,7 @@ export default {
   // 网站地址
   Site: 'https://www.wingedge777.com',
   // 网站副标题
-  Subtitle: 'z frontier',
+  Subtitle: "WingEdge777's site",
   // 网站描述
   Description: '这是 WingEdge777 的博客，专注于算法和后端相关技术的实战分享，涵盖 LLM、AIGC、AI Infra 等技术优化，涉及Python、C++、Go、Rust、Linux、Docker、k8s等领域。同时，博客也分享作者的生活、想法随笔等。',
   // 网站作者
