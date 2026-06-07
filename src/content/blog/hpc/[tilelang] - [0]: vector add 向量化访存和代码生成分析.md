@@ -137,7 +137,6 @@ extern "C" __global__ void __launch_bounds__(256, 1) main_kernel(const half_t* _
 
 这就是下一节 vectorized 要解决的问题。
 
-
 ## 4. add_tilelang_vectorized
 
 这里必须要吐槽一下，翻遍官方文档和 Example，几乎找不到关于 T.vectorized 的详细用法，我也是花了一点时间才摸索写出了下面这个 Kernel。这对于初入 TileLang 的新人来说确实不够友好。
@@ -404,7 +403,7 @@ extern "C" __global__ void __launch_bounds__(256, 1) elementwise_add_no_shared_k
 }
 ```
 
-这做到了 128 bit 向量化访问，但计算还是朴素的 8 次循环，没有生成 tl::add2（或者底层的 HADD2 指令），这说明当前 TileLang 编译器的 Lowering 阶段依然不够完美，指令生成上还存在优化空间。
+这做到了 128 bit 向量化访问，但计算还是朴素的 8 次循环，没有生成 tl::add2（或者底层的 HADD2 指令），这说明当前 TileLang 编译器的 Lowering 阶段依然不够完美，指令生成上还存在优化空间（当然，访存瓶颈的算子不在乎这点计算区别）。
 
 而如果遇到 n = 4096 * 4096 + 1 或 - 1 这种未对齐情况呢？不好意思，整个代码会全部退回到 8 次独立 for 循环（而且是在循环体内塞入 if 边界判断，丑爆）：
 
@@ -449,28 +448,57 @@ extern "C" __global__ void __launch_bounds__(256, 1) elementwise_add_no_shared_k
 
 ## 7. benchmark
 
-直接给 4096 x 4096（对齐），4096 x 4096 + 1（非对齐），4096 x 4096 - 1 （非对齐）的 benchmark 结果：
+直接给 4096 x 4096（对齐），4096 x 4096 - 1（非对齐），4096 x 4096 + 1 （非对齐）的 benchmark 结果（测试设备为5060 laptop）：
 
 ```yaml
-# TODO
+####################################################################################################
+vector add, n: 16777216
+torch                                    mean time: 0.321296 ms
+triton                                   mean time: 0.303344 ms, speedup: 1.06
+tilelang                                 mean time: 0.371168 ms, speedup: 0.87
+tilelang_vectorized                      mean time: 0.303312 ms, speedup: 1.06
+tilelang_vectorized_eager                mean time: 0.302976 ms, speedup: 1.06
+elementwise_add                          mean time: 0.301968 ms, speedup: 1.06
+elementwise_add_no_shared                mean time: 0.301440 ms, speedup: 1.07
+elementwise_add_fp16x8_packed            mean time: 0.300672 ms, speedup: 1.07
+####################################################################################################
+vector add, n: 16777215
+torch                                    mean time: 0.302304 ms
+triton                                   mean time: 0.301488 ms, speedup: 1.00
+tilelang                                 mean time: 0.355040 ms, speedup: 0.85
+tilelang_vectorized                      mean time: 0.302224 ms, speedup: 1.00
+tilelang_vectorized_eager                mean time: 0.304768 ms, speedup: 0.99
+elementwise_add_no_shared                mean time: 0.314512 ms, speedup: 0.96
+elementwise_add_fp16x8_packed            mean time: 0.301984 ms, speedup: 1.00
+####################################################################################################
+vector add, n: 16777217
+torch                                    mean time: 0.302944 ms
+triton                                   mean time: 0.302256 ms, speedup: 1.00
+tilelang                                 mean time: 0.355312 ms, speedup: 0.85
+tilelang_vectorized                      mean time: 0.302304 ms, speedup: 1.00
+tilelang_vectorized_eager                mean time: 0.301728 ms, speedup: 1.00
+elementwise_add_no_shared                mean time: 0.314000 ms, speedup: 0.96
+elementwise_add_fp16x8_packed            mean time: 0.302336 ms, speedup: 1.00
 ```
 
-从数据可以看出，向量化版本（tilelang_vectorized）相比非向量化版 TileLang 算子 性能提升了约 20%，与 Triton 持平。
-这说明手动指定的 fp16x8 向量化成功打满了全局内存的读写带宽。
-未对齐情况下的降速也在预期之内，因为边界 fallback 破坏了完美的 128-bit 连续访存。
+从数据可以看出
+
+- 向量化版本（`tilelang_vectorized`）相比非向量化的基线 TileLang 算子，性能提升了约 20%，与 Triton 基本持平（微秒级别的波动属于合理波动）。
+- 这证明了我们在代码中手动指定的 fp16x8 向量化读写，性能符合预期，打满了全局内存的读写带宽。
+- `elementwise_add_no_shared` 在非对齐场景下出现了较明显的性能下降。这也印证了之前的源码分析：退化为标量操作且充斥着 if 条件分支的 for 循环，明显降低了执行效率。
 
 ## 8. 总结
 
 本文使用 TileLang 对 Element-wise Add 算子进行了“茴字的四种写法”的花式实现，并对各实现方法在对齐/非对齐条件下编译生成的底层 C++ 代码，进行了深入的正确性与性能剖析。
 总结如下：
 
-- 生态定位精准：TileLang 作为 DSL 的后发者，精准地从 Triton 和手写 CUDA C++ 中间又找到了一个切入点（可以进行线程级别的控制），在易用性与底层掌控力之间找到了新的平衡。使得其有机会在算子开发中占据一席之地，很棒
+- 生态定位精准：TileLang 作为 DSL 的后发者，精准地从 Triton 和手写 CUDA C++ 中间又找到了一个切入点（可以进行线程级别的控制），在易用性与底层掌控力之间找到了新的平衡。使得其有机会在算子开发生态中占据一席之地，很棒
 - 关于底层基座：TileLang 基于 TVM 实现，这点我很难评论说好坏
   - 个人是一度对 TVM 充满信心的，在 CV 时代，TVM 每次发一个大版本，我都会用 TVM 编译（autotune）一次 resnet50，但很可惜，真的没有一次能跑出与 TensorRT 持平的性能（更别说超过了），
   - 这也导致本人一度看到所谓的“Graph/算子自动编译”就有点 PTSD，所以面对这套底层机制，心情难免有点微妙。
 - 槽点与避坑（个人体感）：
   - 文档基建匮乏：文档和最佳实践 example 建设不是很好。不过这也好理解，学术界出身的开源项目早期往往如此，维护者难有精力完善周边建设，不好苛求。
-  - eager 模式 不是 truly eager：eager 模式是降低门槛的好方向，但目前它不是 PyTorch 那种的 eager，要谨记
+  - eager 模式不是 truly eager：eager 模式是降低门槛的好方向，但目前它不是 PyTorch 那种的 eager，要谨记
 
 如有错误，欢迎指正，感谢阅读！
 
