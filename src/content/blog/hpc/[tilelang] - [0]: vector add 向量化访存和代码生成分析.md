@@ -8,7 +8,7 @@ cover: "/assets/images/banner/2cc757cc144b109f.webp"
 ---
 
 :::
-TileLang, 目前 kernel 开发的一种 DSL，基于 TVM 实现的 kernel 编译生成器，提供友好的 python 前端抽象，供给算法工程师开发算子使用。TileLang 将简短的 Python 代码解析并 Lowering，自动生成高性能 Kernel 代码，是 openAI TileLang-lang 之后比较火的算子开发 DSL 之一
+TileLang, 目前 kernel 开发的一种 DSL，基于 TVM 实现的 kernel 编译生成器，提供友好的 python 前端抽象，供给算法工程师开发算子使用。TileLang 将简短的 Python 代码解析并 Lowering，自动生成高性能 Kernel 代码，是 openAI Triton 之后比较火的算子开发 DSL 之一
 本文完整代码和测试脚本可以从 GitHub 获取，欢迎关注我的 vitamin-cuda 项目，都是手把手的算子实现与教程：<https://github.com/WingEdge777/vitamin-cuda/tree/main/kernels_DSL/tilelang/vector_add>
 :::
 
