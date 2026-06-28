@@ -10,7 +10,12 @@ import 'dayjs/locale/zh-cn'
 import 'dayjs/locale/en'
 dayjs.locale('zh-cn');
 // 获取文章的描述
-const getDescription = (post: RenderableBlogEntry, num: number = 150) => (post.rendered ? post.rendered.html.replace(/<[^>]+>/g, "").replace(/\s+/g, "") : post.body.replace(/\n/g, "").replace(/#/g, "")).slice(0, num) || '暂无简介'
+const getDescription = (post: RenderableBlogEntry, num: number = 150) => {
+  const custom = post.data?.description?.trim();
+  if (custom) return custom;
+  const auto = (post.rendered ? post.rendered.html.replace(/<[^>]+>/g, "").replace(/\s+/g, "") : post.body.replace(/\n/g, "").replace(/#/g, "")).slice(0, num);
+  return auto || "暂无简介";
+};
 //处理时间
 const fmtTime = (
   time: ConfigType,

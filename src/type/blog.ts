@@ -5,6 +5,7 @@ export type BlogEntry = CollectionEntry<"blog"> | CollectionEntry<"blogEn">;
 export type BlogData = BlogEntry["data"];
 
 export type RenderableBlogEntry = Pick<BlogEntry, "body"> & {
+  data?: Pick<BlogData, "description">;
   rendered?: { html: string } | null;
 };
 
