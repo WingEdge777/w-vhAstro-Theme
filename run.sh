@@ -1,2 +1,2 @@
-# pnpm build
-pnpm run dev
+# bun run build
+bun run dev

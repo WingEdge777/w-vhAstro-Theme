@@ -2,14 +2,14 @@
   "name": "astro-blog",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "bun@1.3.14",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "test": "vitest run",
     "preview": "astro preview",
     "astro": "astro",
-    "newpost": "node ./script/newpost.js",
+    "newpost": "bun ./script/newpost.js",
     "offdev": "astro preferences disable devToolbar",
     "ondev": "astro preferences enable devToolbar"
   },

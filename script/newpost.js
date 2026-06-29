@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const articleName = process.argv.slice(2).join(' ').trim();
 const articleID = crypto.createHash('sha256').update(dayjs().valueOf().toString()).digest('hex').slice(0, 16);
 if (!articleName) {
-  console.error('请提供文章名称，例如：pnpm newpost "第一篇文章"');
+  console.error('请提供文章名称，例如：bun run newpost "第一篇文章"');
   process.exit(1);
 }
 const banners = await fs.readdir("./public/assets/images/banner")

@@ -38,7 +38,10 @@ describe("utils/index", () => {
   });
 
   it("格式化页码", () => {
-    expect(fmtPage("/2/")).toBe("2");
+    // trailingSlash: "never"，分页 URL 与 sitemap 一致，无尾斜杠
+    expect(fmtPage("/2")).toBe("2");
+    expect(fmtPage("/en/3")).toBe("3");
+    expect(fmtPage("/")).toBeNull();
     expect(fmtPage(undefined)).toBeNull();
   });
 });
