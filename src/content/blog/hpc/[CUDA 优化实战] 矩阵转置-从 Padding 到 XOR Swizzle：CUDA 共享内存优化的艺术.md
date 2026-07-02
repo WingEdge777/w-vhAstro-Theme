@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] 矩阵转置-从 Padding 到 XOR Swizzle：CUDA 共享内存优化的艺术"
+description: "CUDA 矩阵转置优化实战：从合并/跨步访存的朴素 Kernel，演进到 Shared Memory Tiling、Padding 与 XOR Swizzle，详解共享内存 Bank Conflict 的成因与规避方法。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "49c4e15376366f8d"
