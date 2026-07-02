@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] safe online softmax - 面试必问：任意 hidden_size、one pass、two pass、trade-off、split-k"
+description: "CUDA safe online softmax 全场景攻略：覆盖任意 hidden_size、one pass/two pass、split-k 等面试高频考点的实现方法与 trade-off 分析。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "8b8f983df949c7c0"

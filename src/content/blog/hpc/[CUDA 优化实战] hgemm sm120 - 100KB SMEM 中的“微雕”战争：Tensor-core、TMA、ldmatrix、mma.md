@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] hgemm sm120 - 100KB SMEM 中的“微雕”战争：Tensor-core、TMA、ldmatrix、mma"
+description: "在 RTX 5060 sm120 架构上手搓 hgemm：基于 100KB 共享内存，结合 TMA、ldmatrix、mma 等 Tensor Core 技术进行极致半精度 GEMM 调优实战。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "b2ab376d19f52ff4"

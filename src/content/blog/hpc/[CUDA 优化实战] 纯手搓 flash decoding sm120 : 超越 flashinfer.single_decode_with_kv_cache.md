@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] 纯手搓 flash decoding sm120 : 超越 flashinfer.single_decode_with_kv_cache"
+description: "纯手搓 sm120 flash decoding kernel，单 query 长 KV cache 场景下超越 flashinfer 的 decode attention 优化实战。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM", "flash attention", "flash decoding"]
 id: "2a8ffb697f7eb56e"

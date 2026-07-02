@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 入门] 认识 CUDA “不存在的存储层级” - local memory"
+description: "CUDA 入门：揭开 local memory 逻辑私有、物理落 global 的本质，讲解触发场景与避免编译器溢出到 local memory 的性能要点。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "af26ad7682e3061a"

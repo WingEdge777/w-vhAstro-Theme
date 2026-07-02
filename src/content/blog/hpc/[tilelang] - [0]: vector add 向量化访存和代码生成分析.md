@@ -1,5 +1,6 @@
 ---
 title: "[TileLang] 0: vector add 向量化访存和生成代码分析"
+description: "TileLang 入门实战：以 vector add 为例分析向量化访存与代码生成，对比 Triton 并解读自动生成的高性能 CUDA Kernel。"
 categories: "code"
 tags: ["CUDA", "TileLang", "Element-Wise"]
 id: "1dd8ab388e48946c"

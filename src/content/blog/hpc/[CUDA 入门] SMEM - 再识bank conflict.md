@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 入门] L1/TEX/SMEM - 再识bank conflict"
+description: "结合 NCU 验证与 NV GTC 技术报告，重新理解 L1/TEX/SMEM 共享存储上的 warp 间 Bank Conflict 成因与规避方法。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "bff10dfdf376e83f"

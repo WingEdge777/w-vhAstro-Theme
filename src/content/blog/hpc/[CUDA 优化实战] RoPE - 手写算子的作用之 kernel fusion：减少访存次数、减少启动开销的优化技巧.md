@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] RoPE - 手写算子的作用之 kernel fusion：减少访存次数、减少启动开销的优化技巧"
+description: "对比 PyTorch 与手写 CUDA Kernel 实现 RoPE 算子，解析 kernel fusion 如何通过减少访存与启动开销突破大模型推理的显存带宽瓶颈。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "722570534c4ba0f8"

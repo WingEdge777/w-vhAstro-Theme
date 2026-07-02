@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] topk_topp_sampling - 乱拳打死老师傅 ： 暴力插入排序 topK、block reduce array merge"
+description: "CUDA 实现 LLM 推理 token sampling：讲解 topK/topP 采样、暴力插入排序与 block reduce array merge 等内核优化技巧。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "sampling"]
 id: "569257f2e554fcfb"

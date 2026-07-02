@@ -1,5 +1,6 @@
 ---
 title: "CUDA 开发者应该熟悉的数"
+description: "梳理 CUDA 性能调优必知的硬件参数与延迟量级——Warp Size、SM 数量、访存带宽等黄金数字，帮助开发者榨干 GPU 算力。"
 categories: "code"
 tags: ["vitamin-cuda","cuda","c++", "GPU"]
 id: "548cec5dfba296d5"

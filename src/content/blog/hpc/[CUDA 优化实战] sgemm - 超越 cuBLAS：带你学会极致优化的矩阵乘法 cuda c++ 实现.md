@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] sgemm - 超越 cuBLAS：带你学会极致优化的矩阵乘法 cuda c++ 实现"
+description: "纯 C++ CUDA 手搓 SGEMM，从 naive tiling 到双缓冲与 swizzle，在 RTX 5060 上超越 cuBLAS，系统复盘 FP32 矩阵乘法极致优化全流程。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "ce4e1621e32a7b08"

@@ -1,5 +1,6 @@
 ---
 title: "深度解读 DeviceQuery：理解你的 GPU 硬件属性"
+description: "以 RTX 5060 为例深度解读 CUDA deviceQuery 输出，帮你理解计算能力、SM 配置、内存层次等硬件属性以指导 Kernel 开发。"
 categories: "hpc"
 tags: ["vitamin-cuda","cuda","c++", "GPU"]
 id: "5860d3d6e3f62297"

@@ -1,5 +1,6 @@
 ---
 title: "手把手 CUDA 编程实践"
+description: "记录 vitamin-cuda 项目从零开始的 CUDA 算子开发实践，从基础 kernel 到应用优化，打造 LeetCUDA 风格的手把手学习路线。"
 categories: "随笔"
 tags: ["vitamin-cuda","cuda","c++"]
 id: "3c6cbaa1ee1bfb8c"

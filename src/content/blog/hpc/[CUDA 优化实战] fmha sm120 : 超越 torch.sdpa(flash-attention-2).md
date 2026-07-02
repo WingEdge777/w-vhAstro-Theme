@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] fmha sm120 : 超越 torch.sdpa(flash-attention-2)"
+description: "在 sm120 架构上纯手搓 FMHA，基于 TMA+ldmatrix+mma 在 prefill 场景超越 torch.sdpa 与 Flash Attention-2 的实战复盘。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM", "flash attention"]
 id: "7d1151d07a70e2c9"

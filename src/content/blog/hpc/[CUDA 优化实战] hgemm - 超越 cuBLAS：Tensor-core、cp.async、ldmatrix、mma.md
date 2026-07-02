@@ -1,5 +1,6 @@
 ---
 title: "[CUDA 优化实战] hgemm - 超越 cuBLAS：Tensor-core、cp.async、ldmatrix、mma"
+description: "FP16/BF16 HGEMM 手搓实战：运用 cp.async、ldmatrix、mma 与 swizzle，在 RTX 5060 上超越 cuBLAS 的半精度矩阵乘法优化全复盘。"
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "5a219c62549f9573"
