@@ -1,5 +1,6 @@
 ---
 title: "A Deep Dive into DeviceQuery: Understanding Your GPU Hardware"
+description: "Decode CUDA deviceQuery output on RTX 5060 — compute capability, SM layout, memory hierarchy — and turn raw specs into actionable kernel design intuition."
 categories: "hpc"
 tags: ["vitamin-cuda","cuda","c++", "GPU"]
 id: "5860d3d6e3f62297"

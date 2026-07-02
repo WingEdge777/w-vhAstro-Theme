@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] Matrix Transpose — From Padding to XOR Swizzle: The Art of Shared Memory Optimization"
+description: "CUDA matrix transpose optimization: from coalesced vs strided access through shared-memory tiling, padding, and XOR swizzle to eliminate bank conflicts."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "49c4e15376366f8d"

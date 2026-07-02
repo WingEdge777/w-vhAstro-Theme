@@ -1,5 +1,6 @@
 ---
 title: "Numbers Every CUDA Developer Should Know"
+description: "A cheat sheet of CUDA hardware constants and latency scales — warp size, SM count, memory bandwidth — that every performance-minded GPU programmer should internalize."
 categories: "code"
 tags: ["vitamin-cuda","cuda","c++", "GPU"]
 id: "548cec5dfba296d5"

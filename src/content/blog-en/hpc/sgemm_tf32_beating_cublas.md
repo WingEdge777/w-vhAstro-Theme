@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] SGEMM TF32 — Beating cuBLAS with Tensor Cores, cp.async, ldmatrix & mma"
+description: "TF32 Tensor Core SGEMM deep dive: cp.async, ldmatrix, mma, and XOR swizzle derivations — hand-tuned to challenge cuBLAS at specific problem sizes."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "ba9e9d9171004edc"

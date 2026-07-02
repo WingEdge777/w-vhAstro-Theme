@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] HGEMM — Beating cuBLAS: Tensor Core, cp.async, ldmatrix, mma"
+description: "FP16/BF16 HGEMM hand-tuned with cp.async, ldmatrix, mma, and swizzle — a full walkthrough of beating cuBLAS on RTX 5060 for half-precision GEMM."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "5a219c62549f9573"

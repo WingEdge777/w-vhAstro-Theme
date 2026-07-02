@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] Hand-Rolled Flash Decoding on SM120: Beating flashinfer.single_decode_with_kv_cache"
+description: "Hand-rolled SM120 flash decoding kernel for single-query, long KV-cache decode attention — optimized to beat flashinfer's single_decode_with_kv_cache."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM", "flash attention", "flash decoding"]
 id: "2a8ffb697f7eb56e"

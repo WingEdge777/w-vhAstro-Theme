@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] SGEMM — Beating cuBLAS: A Deep Dive into Peak-Performance Matrix Multiplication in Pure CUDA C++"
+description: "Hand-crafted FP32 SGEMM in pure CUDA C++: from naive tiling to double-buffering and swizzle, beating cuBLAS on RTX 5060 with a full optimization walkthrough."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "ce4e1621e32a7b08"

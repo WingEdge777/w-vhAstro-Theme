@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] HGEMM SM120 — Micro-Sculpture Warfare in 100KB SMEM: Tensor Core, TMA, ldmatrix, mma"
+description: "HGEMM on RTX 5060 SM120: squeezing peak performance from 100KB shared memory with TMA, ldmatrix, mma, and Tensor Core tuning."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM"]
 id: "b2ab376d19f52ff4"

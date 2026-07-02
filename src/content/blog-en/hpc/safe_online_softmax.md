@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] Safe Online Softmax — A Must-Know for Interviews: Arbitrary hidden_size, One/Two Pass, Trade-offs, Split-K"
+description: "A CUDA guide to safe online softmax across arbitrary hidden_size, one-pass vs two-pass, split-k, and the trade-offs behind each — a common interview topic."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU"]
 id: "8b8f983df949c7c0"

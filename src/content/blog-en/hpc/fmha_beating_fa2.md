@@ -1,5 +1,6 @@
 ---
 title: "[CUDA in Practice] FMHA on SM120: Beating torch.sdpa (FlashAttention-2)"
+description: "Hand-crafted FMHA on SM120 with TMA, ldmatrix, and mma — a prefill Flash Attention kernel that beats torch.sdpa and FlashAttention-2 on RTX 5060."
 categories: "code"
 tags:  ["vitamin-cuda","cuda","c++", "GPU", "GEMM", "flash attention"]
 id: "7d1151d07a70e2c9"

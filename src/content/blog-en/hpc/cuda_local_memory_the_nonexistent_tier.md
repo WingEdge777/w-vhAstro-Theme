@@ -1,5 +1,6 @@
 ---
 title: "[CUDA Basics] Understanding CUDA's \"Nonexistent\" Memory Tier: Local Memory"
+description: "CUDA primer on local memory: logically per-thread but physically in global memory, when the compiler spills to it, and how to avoid the performance hit."
 categories: "code"
 tags: ["vitamin-cuda","cuda","c++", "GPU"]
 id: "7f4c2d9a1e6b8c30"
