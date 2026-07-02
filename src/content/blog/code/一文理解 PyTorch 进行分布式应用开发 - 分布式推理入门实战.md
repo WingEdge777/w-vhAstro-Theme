@@ -1,5 +1,6 @@
 ---
 title: "一文理解 PyTorch 进行分布式应用开发 - 分布式推理入门实战"
+description: "用不到 200 行 PyTorch 代码从零手搓大模型分布式推理：数据并行 DP、张量并行 TP、流水线并行 PP，2 卡实战，无需 Megatron 或 vLLM。"
 categories: "code"
 tags: ["AI infer", "LLM", "PyTorch distribution", "Tensor Parallelism", "Data Parallelism", "Pipeline Parallelism"]
 id: "f943166143951a0b"

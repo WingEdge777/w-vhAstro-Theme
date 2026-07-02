@@ -1,5 +1,6 @@
 ---
 title: "Distributed Inference with PyTorch from First Principles: DP, TP, and PP in Less Than 200 Lines"
+description: "Rebuild LLM distributed inference from scratch with PyTorch: Data Parallelism, Tensor Parallelism, and Pipeline Parallelism in under 200 lines on 2 GPUs — without Megatron or vLLM."
 categories: "code"
 tags: ["AI infer", "LLM", "PyTorch distribution", "Tensor Parallelism", "Data Parallelism", "Pipeline Parallelism"]
 id: "f943166143951a0b"
