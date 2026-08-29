@@ -7,7 +7,7 @@ export default {
   data: [
     {
       "name": "WingEdge777的博客",
-      "link": "https://www.wingedge777.com",
+      "link": "https://www.baizeway.com",
       "avatar": "/assets/images/avatar.jpg",
       "descr": "该想点什么东西呢"
     },

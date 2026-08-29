@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production  # 环境名称，比如 production, staging
-      url: https://www.wingedge777.com/  # 这里填你的网址
+      url: https://www.baizeway.com/  # 这里填你的网址
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4

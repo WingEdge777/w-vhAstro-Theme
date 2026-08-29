@@ -198,7 +198,7 @@ __device__ __forceinline__ bool insert_sorted(float (&score)[TOP_K], int (&token
 
 坦白讲，这个插入排序函数也是花了我一些时间才写出来的。朴素的插排是找到 position，然后赋值+break，但这种写法在 gpu 上是行不通的。为什么？
 
-如果你写下`score[insert_pos] = new_val；`这行代码，由于 insert_pos 是非编译期常量，会导致整个数组会被分配到 local memory，性能暴跌，关于 local memory 见我的 [local memory 文章](https://www.wingedge777.com/article/af26ad7682e3061a)
+如果你写下`score[insert_pos] = new_val；`这行代码，由于 insert_pos 是非编译期常量，会导致整个数组会被分配到 local memory，性能暴跌，关于 local memory 见我的 [local memory 文章](https://www.baizeway.com/article/af26ad7682e3061a)
 因此，为了规避这个问题，我们要进行完整的 TOP-1 次循环，只在赋什么值上做两次判断。
 
 - 如果 new_val 大于 当前位置 i 上值，同时还大于 i-1 上的值，那么说明他的位置是在 i 之前，那么就把 i-1 的值放到当前位置上

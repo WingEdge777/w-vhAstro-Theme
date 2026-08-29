@@ -326,4 +326,4 @@ fisher install ajeetdsouza/zoxide.fish
 
 如有错误，欢迎指正，感谢~
 
-本文首发于 <https://www.wingedge777.com>, 可以随意转载
+本文首发于 <https://www.baizeway.com>, 可以随意转载

@@ -5,7 +5,7 @@
 
 基于 Astro 主题 [vhAstro-Theme](https://github.com/uxiaohan/vhAstro-Theme) 修改的博客主题，你也可以使用该主题搭建属于你自己的博客！
 
-博客站点  ➡️ [https://www.wingedge777.com](https://www.wingedge777.com)，欢迎访问！
+博客站点  ➡️ [https://www.baizeway.com](https://www.baizeway.com)，欢迎访问！
 
 Lighthouse 评分：
 

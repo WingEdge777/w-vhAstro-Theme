@@ -4,7 +4,7 @@
 
 Personal blog and astro theme based on [vhAstro-Theme](https://github.com/uxiaohan/vhAstro-Theme)
 
-Blog Demo  ➡️ [https://www.wingedge777.com](https://www.wingedge777.com)
+Blog Demo  ➡️ [https://www.baizeway.com](https://www.baizeway.com)
 
 ![demo](./img/demo_home.jpg)
 

@@ -2,7 +2,7 @@ export default {
   // 网站标题
   Title: "WingEdge777's Blog",
   // 网站地址
-  Site: 'https://www.wingedge777.com',
+  Site: 'https://www.baizeway.com',
   // 网站副标题
   Subtitle: "WingEdge777's site",
   // 网站描述
@@ -57,7 +57,7 @@ export default {
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
     // 建议使用 https://tabler.io/icons 直接下载 SVG
     { text: 'Github', link: 'https://github.com/WingEdge777', icon: 'WebSite_github' },
-    { text: 'RSS', link: 'https://www.wingedge777.com/rss.xml', icon: 'WebSite_rss' },
+    { text: 'RSS', link: 'https://www.baizeway.com/rss.xml', icon: 'WebSite_rss' },
     // { text: '骤雨重山图床', link: 'https://wp-cdn.4ce.cn', icon: 'WebSite_img' },
   ],
   // 侧边栏展示
@@ -83,7 +83,7 @@ export default {
     // Twikoo 评论
     Twikoo: {
       enable: true,
-      envId: 'https://twikoo.wingedge777.com'
+      envId: 'https://twikoo.baizeway.com'
     }
   },
   // Google 广告
