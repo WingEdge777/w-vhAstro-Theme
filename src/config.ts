@@ -74,8 +74,15 @@ export default {
   // DNS预解析地址
   DNSOptimization: [
     'https://registry.npmmirror.com',
-    'https://pagead2.googlesyndication.com'
+    'https://pagead2.googlesyndication.com',
+    'https://stats.baizeway.com'
   ],
+  // Umami 统计（自建）
+  Umami: {
+    enable: true,
+    src: 'https://stats.baizeway.com/script.js',
+    websiteId: 'a4d379c8-5de5-485b-a3d7-9eeb83519b28'
+  },
   // 博客音乐组件解析接口
   vhMusicApi: 'https://vh-api.4ce.cn/blog/meting',
   // 评论组件（只允许同时开启一个）

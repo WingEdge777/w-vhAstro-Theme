@@ -2,7 +2,7 @@
 const { title, keywords, description, pagecover, activeNav, Home, headings, publishedTime, modifiedTime, availableLocales } = Astro.props;
 // 网站配置
 import SITE_INFO from "@/config";
-const { GoogleAds, Theme, HomeBanner } = SITE_INFO;
+const { GoogleAds, Theme, HomeBanner, Umami } = SITE_INFO;
 const { ad_Client, asideAD_Slot, articleAD_Slot } = GoogleAds;
 import { getDictionary } from "@/i18n/dictionaries";
 import { getLocaleFromPathname } from "@/i18n/routes";
@@ -49,6 +49,8 @@ import "./Layout.less";
 	<Head Title={title} Keywords={keywords} Description={description || dict.site.description} PageCover={pagecover} PublishedTime={publishedTime} ModifiedTime={modifiedTime} availableLocales={availableLocales}>
 		<!-- 谷歌广告JS加载项 -->
 		{ad_Client && (asideAD_Slot || articleAD_Slot) && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ad_Client}`} crossorigin="anonymous" />}
+		<!-- Umami 统计 -->
+		{Umami.enable && <script is:inline defer src={Umami.src} data-website-id={Umami.websiteId} />}
 		<!-- 彩旗🎈 -->
 		<script is:inline src="/assets/js/vhCaiqi.js" defer></script>
 		<!-- 设置主题颜色 -->

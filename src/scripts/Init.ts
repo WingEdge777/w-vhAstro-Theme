@@ -36,6 +36,8 @@ import GoogleAdInit from "@/scripts/GoogleAd";
 // Han Analytics 统计
 //  谷歌 SEO 推送
 import SeoPushInit from "@/scripts/SeoPush";
+// Umami 统计（Swup 切页）
+import UmamiInit from "@/scripts/Umami";
 // SmoothScroll 滚动优化
 import SmoothScroll from "@/scripts/Smoothscroll";
 
@@ -58,6 +60,7 @@ const featureHandlers: Record<InitFeature, () => void | Promise<void>> = {
   "talking": initTalking,
   "google-ad": GoogleAdInit,
   "seo-push": SeoPushInit,
+  "umami": UmamiInit,
   "comment": () => {
     const commentKey = checkComment();
     if (commentKey) return commentInit(commentKey);
